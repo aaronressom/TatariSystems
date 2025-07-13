@@ -68,7 +68,7 @@ const getInitials = (name: string) => {
 const Team = () => {
   const navigate = useNavigate()
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black pt-navbar">
       <Navbar />
       
       {/* Hero Section */}

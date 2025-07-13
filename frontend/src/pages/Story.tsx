@@ -147,7 +147,7 @@ const Story = () => {
   }, [mousePosition])
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black pt-navbar">
       <Navbar />
       
       {/* Hero Section */}
@@ -264,44 +264,46 @@ const Story = () => {
             </p>
           </motion.div>
 
-          <div className="relative h-96">
+          <div className="space-y-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="absolute inset-0 flex flex-col lg:flex-row items-center justify-between"
+                className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
               >
-                <div className="flex-1 text-center lg:text-left mb-8 lg:mb-0">
-                  <h3 className="text-3xl font-bold text-white mb-2">
+                {/* Text Content */}
+                <div className="flex-1 text-center lg:text-left">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                     {originSlides[currentSlide].title}
                   </h3>
                   {originSlides[currentSlide].subtitle && (
-                    <p className="text-lg text-gray-400 mb-6 italic">
+                    <p className="text-base sm:text-lg text-gray-400 mb-6 italic">
                       {originSlides[currentSlide].subtitle}
                     </p>
                   )}
-                  <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-6">
+                  <p className="text-base sm:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 mb-6">
                     {originSlides[currentSlide].content}
                   </p>
                   {currentSlide === 0 && (
                     <div className="flex justify-center lg:justify-start">
                       <div 
                         onClick={() => navigate('/mining')}
-                        className="group bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 flex items-center justify-center cursor-pointer"
+                        className="group bg-primary-600 hover:bg-primary-700 text-white font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 flex items-center justify-center cursor-pointer"
                       >
                         Mining
-                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
                   )}
                 </div>
                 
+                {/* Animation Content */}
                 <div className="flex-1 flex justify-center lg:justify-end">
                   {currentSlide === 0 && bitcoinAnimationData ? (
-                    <div className="w-80 h-80 rounded-2xl flex items-center justify-center">
+                    <div className="hidden md:block w-full max-w-[240px] lg:max-w-[280px] h-auto aspect-square rounded-2xl flex items-center justify-center">
                       <Lottie
                         animationData={bitcoinAnimationData}
                         loop={true}
@@ -310,7 +312,7 @@ const Story = () => {
                       />
                     </div>
                   ) : currentSlide === 1 && aiAnimationData ? (
-                    <div className="w-80 h-80 rounded-2xl flex items-center justify-center">
+                    <div className="hidden md:block w-full max-w-[240px] lg:max-w-[280px] h-auto aspect-square rounded-2xl flex items-center justify-center">
                       <Lottie
                         animationData={aiAnimationData}
                         loop={true}
@@ -319,7 +321,7 @@ const Story = () => {
                       />
                     </div>
                   ) : currentSlide === 2 && infrastructureAnimationData ? (
-                    <div className="w-80 h-80 rounded-2xl flex items-center justify-center">
+                    <div className="hidden md:block w-full max-w-[240px] lg:max-w-[280px] h-auto aspect-square rounded-2xl flex items-center justify-center">
                       <Lottie
                         animationData={infrastructureAnimationData}
                         loop={true}
@@ -328,15 +330,15 @@ const Story = () => {
                       />
                     </div>
                   ) : (
-                    <div className={`w-80 h-80 bg-gradient-to-br ${originSlides[currentSlide].color} rounded-2xl border border-gray-600 flex items-center justify-center shadow-xl`}>
+                    <div className={`hidden md:block w-full max-w-[240px] lg:max-w-[280px] h-auto aspect-square bg-gradient-to-br ${originSlides[currentSlide].color} rounded-2xl border border-gray-600 flex items-center justify-center shadow-xl`}>
                       <div className="text-center">
-                        <div className="w-20 h-20 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
-                          <span className="text-4xl">
+                        <div className="w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
+                          <span className="text-3xl sm:text-4xl">
                             {currentSlide === 0 ? '⛏️' : currentSlide === 1 ? '🚀' : '⚡'}
                           </span>
                         </div>
-                        <p className="text-white/80 text-lg">{originSlides[currentSlide].animation}</p>
-                        <p className="text-white/60 text-sm mt-2">
+                        <p className="text-white/80 text-base sm:text-lg">{originSlides[currentSlide].animation}</p>
+                        <p className="text-white/60 text-xs sm:text-sm mt-2">
                           {currentSlide === 0 ? 'Loading Section 1 Animation...' : currentSlide === 1 ? 'Loading Section 2 Animation...' : 'Loading Section 3 Animation...'}
                         </p>
                       </div>

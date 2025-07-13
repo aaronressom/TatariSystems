@@ -121,7 +121,7 @@ const OmniStack = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black pt-navbar">
       <Navbar />
       
       {/* Section 1: Hero with Video Background */}

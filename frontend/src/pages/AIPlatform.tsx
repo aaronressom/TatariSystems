@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import { motion } from 'framer-motion'
 
 const AIPlatform = () => (
-  <div className="min-h-screen bg-white">
+  <div className="min-h-screen bg-white pt-navbar">
     <Navbar />
     <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="mb-16">

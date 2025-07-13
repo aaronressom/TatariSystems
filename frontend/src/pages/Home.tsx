@@ -215,7 +215,7 @@ const Home = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black pt-navbar">
       <Navbar />
       
       {/* Hero Section */}

@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { useState, useRef } from 'react'
 import { getAssetPath } from '../utils/paths'
 import { getIconSrc } from '../utils/iconMapping'
+import { Menu, X } from 'lucide-react'
+import { AnimatePresence } from 'framer-motion'
 
 const Navbar = () => {
   const location = useLocation()
@@ -10,6 +12,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const dropdownTimeout = useRef<NodeJS.Timeout | null>(null)
   const isActive = (path: string) => location.pathname === path
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleMouseEnter = (label: string) => {
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current)
@@ -459,15 +462,16 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-navbar">
+    <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16 relative w-full">
+        <div className="flex items-center h-16 relative w-full glass-navbar">
           {/* Logo */}
-          <div className="absolute left-0 top-0 h-full flex items-center">
+          <div className="absolute left-0 top-0 h-full flex items-center z-10">
             <Link
               to="/"
               style={{ textDecoration: 'none' }}
               className="no-underline hover:no-underline focus:outline-none flex items-center space-x-3 group"
+              onClick={() => setMobileMenuOpen(false)}
             >
               <motion.img
                 src={getAssetPath('/assets/tatarilogo.png')}
@@ -480,9 +484,18 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Centered Navigation */}
+          {/* Hamburger menu button (mobile only) */}
+          <button
+            className="sm:hidden absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMobileMenuOpen((v) => !v)}
+          >
+            {mobileMenuOpen ? <X className="h-7 w-7 text-white" /> : <Menu className="h-7 w-7 text-white" />}
+          </button>
+
+          {/* Centered Navigation (desktop only) */}
           <div className="flex-1 flex justify-center">
-            <div className="flex items-center space-x-6">
+            <div className="hidden sm:flex items-center space-x-6">
               <div
                 className="text-base font-medium transition-colors duration-200 text-white/80 hover:text-primary-500 cursor-pointer"
                 onClick={() => navigate('/')}
@@ -510,8 +523,8 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Invisible right spacer to balance logo */}
-          <div className="absolute right-0 top-0 h-full flex items-center" style={{ visibility: 'hidden' }}>
+          {/* Invisible right spacer to balance logo (desktop only) */}
+          <div className="absolute right-0 top-0 h-full items-center hidden sm:flex" style={{ visibility: 'hidden' }}>
             <Link
               to="/"
               style={{ textDecoration: 'none' }}
@@ -528,7 +541,80 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Dropdowns */}
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            className="fixed inset-0 z-[60] bg-black !bg-opacity-100 flex flex-col sm:hidden" 
+            style={{ backgroundColor: '#000000' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+              <Link
+                to="/"
+                className="flex items-center space-x-3 group"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <img src={getAssetPath('/assets/tatarilogo.png')} alt="Tatari Systems Logo" className="h-8 w-auto" />
+                <span className="text-lg font-bold text-white tracking-tight">Tatari</span>
+              </Link>
+              <button
+                className="p-2 rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                aria-label="Close menu"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <X className="h-7 w-7 text-white" />
+              </button>
+            </div>
+            <div className="flex flex-col gap-2 px-6 py-6">
+              <button
+                className="text-base font-medium text-white/90 hover:text-primary-500 text-left py-2"
+                onClick={() => { navigate('/'); setMobileMenuOpen(false); }}
+              >
+                Home
+              </button>
+              {megaMenus.map((dropdown) => (
+                <div key={dropdown.label} className="flex flex-col">
+                  <span className="text-base font-semibold text-white/80 mt-4 mb-2">{dropdown.label}</span>
+                  {/* Render dropdown content as flat links for mobile */}
+                  {dropdown.label === 'Products' && productDropdown.map((item) => (
+                    <button
+                      key={item.title}
+                      className="text-white/80 hover:text-primary-500 text-left py-2 pl-4"
+                      onClick={() => { navigate(item.ctaHref); setMobileMenuOpen(false); }}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                  {dropdown.label === 'Company' && companyDropdown.map((item) => (
+                    <button
+                      key={item.title}
+                      className="text-white/80 hover:text-primary-500 text-left py-2 pl-4"
+                      onClick={() => { navigate(item.ctaHref); setMobileMenuOpen(false); }}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                  {dropdown.label === 'Learn More' && learnMoreDropdown.map((item) => (
+                    <button
+                      key={item.title}
+                      className="text-white/80 hover:text-primary-500 text-left py-2 pl-4"
+                      onClick={() => { navigate(item.ctaHref); setMobileMenuOpen(false); }}
+                    >
+                      {item.title}
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Dropdowns (desktop only) */}
       {megaMenus.map((dropdown) => (
         <motion.div
           key={dropdown.label}
@@ -540,7 +626,7 @@ const Navbar = () => {
           }}
           exit={{ opacity: 0, y: -16, scale: 0.98 }}
           transition={{ duration: 0.22, type: 'spring', stiffness: 260, damping: 22 }}
-          className={`fixed top-20 left-0 right-0 flex justify-center z-50 ${
+          className={`fixed top-20 left-0 right-0 justify-center z-50 hidden sm:flex ${
             openDropdown === dropdown.label ? '' : 'pointer-events-none hidden'
           }`}
           onMouseEnter={() => handleMouseEnter(dropdown.label)}

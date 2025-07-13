@@ -1107,3 +1107,8 @@ a {
 .animate-career-marquee {
   animation: career-marquee 20s linear infinite;
 } 
+
+/* Utility: Add top padding to main content to account for fixed navbar */
+.pt-navbar {
+  padding-top: 4rem; /* 64px, matches h-16 of navbar */
+} 
