@@ -87,7 +87,7 @@ const Navbar = () => {
     },
     {
       title: 'Training Stack',
-      description: 'Purpose-built GPU clusters for large-scale model training.',
+      description: 'Purpose-built GPU clusters for large-scale training.',
       color: 'bg-brand-blue-1',
       cta: 'Join Early Access',
       ctaHref: '/training-stack',
@@ -144,7 +144,7 @@ const Navbar = () => {
   const companyDropdown = [
     {
       title: 'Story',
-      description: 'Our founding story, vision, and mission to revolutionize AI.',
+      description: 'Our founding story, vision, and mission to change AI.',
       color: 'bg-brand-blue-1',
       cta: 'Read Our Story',
       ctaHref: '/story',
@@ -171,7 +171,7 @@ const Navbar = () => {
     },
     {
       title: 'Team',
-      description: 'Meet the talented individuals building Tatari Systems.',
+      description: 'Meet the talented individuals building Tatari.',
       color: 'bg-brand-blue-1',
       cta: 'Meet the Team',
       ctaHref: '/team',
