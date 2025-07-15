@@ -62,33 +62,6 @@ const Navbar = () => {
       ],
     },
     {
-      title: 'Pricing',
-      description: 'Simple, transparent pricing for all compute needs.',
-      color: 'bg-brand-blue-1',
-      cta: 'View Pricing',
-      ctaHref: '/pricing',
-      subsections: [
-        {
-          label: 'Cost Calculator',
-          desc: 'Estimate your monthly spend instantly.',
-          icon: 'Sliders',
-          href: '/pricing#calculator',
-        },
-        {
-          label: 'No Hidden Fees',
-          desc: 'Flat hourly rates, no egress charges.',
-          icon: 'Shield',
-          href: '/pricing#no-fees',
-        },
-        {
-          label: 'Volume Discounts',
-          desc: 'Save more as you scale up your usage.',
-          icon: 'BookOpen',
-          href: '/pricing#discounts',
-        },
-      ],
-    },
-    {
       title: 'Training Stack',
       description: 'Purpose-built GPU clusters for large-scale training.',
       color: 'bg-brand-blue-1',
@@ -344,7 +317,7 @@ const Navbar = () => {
       label: 'Products',
       mainTo: '#',
       content: (
-        <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl">
+        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl">
           {productDropdown.map((product) => (
             <div className="flex flex-col h-full min-w-0" key={product.title}>
               {/* Main Card */}

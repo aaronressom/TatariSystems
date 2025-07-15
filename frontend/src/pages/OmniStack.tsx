@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Play, Users, Shield, Globe, Cpu, TrendingUp, CheckCircle, BarChart3, Target, Clock, DollarSign, Zap, Cloud, Server, Database, Lock, Activity, MapPin, Building, Rocket, Scale, Map, Mountain, TreePine, Waves, Sun } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
+import { getIconSrc } from '../utils/iconMapping'
+import ReactMemo from 'react'
 
 const OmniStack = () => {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null)
@@ -13,54 +15,54 @@ const OmniStack = () => {
   // Get the base path for GitHub Pages deployment
   const base = (import.meta as any).env?.PROD ? '/TatariSystems' : ''
 
-  const stats = [
-    { number: "30%", label: "Savings vs. industry average", icon: TrendingUp },
-    { number: "98%", label: "Lower carbon emissions", icon: Shield },
-    { number: "0", label: "Fees and unexpected costs", icon: DollarSign }
-  ]
+  const stats = ReactMemo.useMemo(() => [
+    { number: "30%", label: "Savings vs. industry average", icon: "TrendingUp" },
+    { number: "98%", label: "Lower carbon emissions", icon: "Shield" },
+    { number: "0", label: "Fees and unexpected costs", icon: "DollarSign" }
+  ], [])
 
-  const features = [
+  const features = ReactMemo.useMemo(() => [
     {
       title: "Managed scheduler",
       description: "Plug-and-play SLURM or Kubernetes onboarding",
-      icon: Cpu,
+      icon: "Cpu",
       color: "from-blue-500 to-blue-600"
     },
     {
       title: "Full GPU access",
       description: "No hypervisor overhead; direct hardware control",
-      icon: Server,
+      icon: "Server",
       color: "from-green-500 to-green-600"
     },
     {
       title: "Shared isn't slow",
       description: "Clusters are yours — fast, isolated",
-      icon: Zap,
+      icon: "Zap",
       color: "from-purple-500 to-purple-600"
     },
     {
       title: "Global regions",
       description: "Closer to your data, lower latency",
-      icon: Globe,
+      icon: "Globe",
       color: "from-orange-500 to-orange-600"
     }
-  ]
+  ], [])
 
   const idealFor = [
     {
       title: "AI Startups",
       description: "Rapid model training without infrastructure lock-in",
-      icon: Rocket
+      icon: "Rocket"
     },
     {
       title: "Research Labs",
       description: "High-throughput clusters optimized for SLURM",
-      icon: Building
+      icon: "Building"
     },
     {
       title: "SMBs scaling AI",
       description: "Enterprise-grade compute with simplicity",
-      icon: Scale
+      icon: "Scale"
     }
   ]
 
@@ -68,26 +70,26 @@ const OmniStack = () => {
     {
       title: "No hidden fees",
       description: "Flat hourly pricing; zero egress charges",
-      icon: DollarSign
+      icon: "DollarSign"
     },
     {
       title: "Commitment optional",
       description: "Pay-as-you-go or volume discounts available",
-      icon: CheckCircle
+      icon: "CheckCircle"
     },
     {
       title: "Built to build",
       description: "Engineered from hands-on mining experience",
-      icon: Shield
+      icon: "Shield"
     }
   ]
 
   const regions = [
-    { name: "North America", status: "active", color: "#153e84", icon: Globe },
-    { name: "Europe", status: "active", color: "#153e84", icon: Globe },
-    { name: "Asia Pacific", status: "expanding", color: "#507cbb", icon: Globe },
-    { name: "South America", status: "planned", color: "#A5ADB8", icon: Globe },
-    { name: "Africa", status: "planned", color: "#A5ADB8", icon: Globe }
+    { name: "North America", status: "active", color: "#153e84", icon: "Globe" },
+    { name: "Europe", status: "active", color: "#153e84", icon: "Globe" },
+    { name: "Asia Pacific", status: "expanding", color: "#507cbb", icon: "Globe" },
+    { name: "South America", status: "planned", color: "#A5ADB8", icon: "Globe" },
+    { name: "Africa", status: "planned", color: "#A5ADB8", icon: "Globe" }
   ]
 
   const barChartData = {
@@ -146,18 +148,18 @@ const OmniStack = () => {
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.4 }}
               className="max-w-4xl"
             >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
               >
                 <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
                   The Complete
                   <br />
-                  <span className="bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent">
+                  <span className="text-white">
                     AI Stack
                   </span>
                 </h1>
@@ -169,7 +171,7 @@ const OmniStack = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
                 className="flex flex-col sm:flex-row gap-4 justify-center"
               >
                 <div
@@ -221,6 +223,7 @@ const OmniStack = () => {
                   {/* Content */}
                   <div className="flex flex-col justify-between h-full flex-1">
                     <div>
+                      <img src={getIconSrc(stat.icon)} alt={stat.label} className="h-8 w-8 mb-2" loading="lazy" />
                       <div className="text-5xl font-bold text-white mb-1">{stat.number}</div>
                       <div className="text-base font-semibold text-white mb-1">{stat.label}</div>
                       <div className="text-gray-400 text-base mb-4">More performance for less</div>
@@ -404,8 +407,8 @@ const OmniStack = () => {
                 whileHover={{ scale: 1.05 }}
                 className="bg-gray-900 rounded-2xl p-6 text-center hover:bg-gray-800 transition-all duration-300 border border-gray-700"
               >
-                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  <feature.icon className="h-8 w-8 text-white" />
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br ${feature.color} mb-4">
+                  <img src={getIconSrc(feature.icon)} alt={feature.title} className="h-8 w-8 text-white" loading="lazy" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
                 <p className="text-gray-300">{feature.description}</p>
@@ -440,7 +443,7 @@ const OmniStack = () => {
                 className="bg-gray-800 rounded-2xl p-8 text-center hover:bg-gray-700 transition-all duration-300 border border-gray-700"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="h-8 w-8 text-white" />
+                  <img src={getIconSrc(item.icon)} alt={item.title} className="h-8 w-8 text-white" loading="lazy" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                 <p className="text-gray-300">{item.description}</p>
@@ -475,7 +478,7 @@ const OmniStack = () => {
                 className="bg-gray-900 rounded-2xl p-8 text-center hover:bg-gray-800 transition-all duration-300 border border-gray-700"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <point.icon className="h-8 w-8 text-white" />
+                  <img src={getIconSrc(point.icon)} alt={point.title} className="h-8 w-8 text-white" loading="lazy" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{point.title}</h3>
                 <p className="text-gray-300">{point.description}</p>
@@ -519,7 +522,7 @@ const OmniStack = () => {
                   style={{ backgroundColor: region.color }}
                 >
                   <div className="text-center">
-                    <region.icon className="h-8 w-8 text-white mx-auto mb-2" />
+                    <img src={getIconSrc(region.icon)} alt={region.name} className="h-8 w-8 text-white mx-auto mb-2" loading="lazy" />
                     <h3 className="text-white font-bold mb-2">{region.name}</h3>
                     <span className="text-white/80 text-sm capitalize">{region.status}</span>
                   </div>
@@ -566,4 +569,4 @@ const OmniStack = () => {
   )
 }
 
-export default OmniStack 
+export default ReactMemo.memo(OmniStack) 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Play, Users, Shield, Globe, Cpu, TrendingUp, CheckCircle, BarChart3, Target, Clock, DollarSign, Zap, Cloud, Server, Database, Lock, Activity, ChevronRight, ChevronLeft } from 'lucide-react'
+import { ArrowRight, ChevronRight, ChevronLeft } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Lottie from 'lottie-react'
 import { useNavigate } from 'react-router-dom'
+import { getIconSrc } from '../utils/iconMapping'
+import ReactMemo from 'react'
 // Animation will be loaded dynamically
 const aiAnimation = null
 
@@ -20,23 +22,25 @@ const Story = () => {
   // Get the base path for GitHub Pages deployment
   const base = (import.meta as any).env?.PROD ? '/TatariSystems' : ''
 
-  // Load animation data
+  // Lazy-load Lottie animations only when the relevant slide is active
   useEffect(() => {
-    fetch(`${base}/animations/sec1.json`)
-      .then(response => response.json())
-      .then(data => setBitcoinAnimationData(data))
-      .catch(error => console.error('Error loading Section 1 animation:', error))
-    
-    fetch(`${base}/animations/sec2.json`)
-      .then(response => response.json())
-      .then(data => setAiAnimationData(data))
-      .catch(error => console.error('Error loading Section 2 animation:', error))
-    
-    fetch(`${base}/animations/sec3.json`)
-      .then(response => response.json())
-      .then(data => setInfrastructureAnimationData(data))
-      .catch(error => console.error('Error loading Section 3 animation:', error))
-  }, [base])
+    if (currentSlide === 0 && !bitcoinAnimationData) {
+      fetch(`${base}/animations/sec1.json`)
+        .then(response => response.json())
+        .then(data => setBitcoinAnimationData(data))
+        .catch(error => console.error('Error loading Section 1 animation:', error))
+    } else if (currentSlide === 1 && !aiAnimationData) {
+      fetch(`${base}/animations/sec2.json`)
+        .then(response => response.json())
+        .then(data => setAiAnimationData(data))
+        .catch(error => console.error('Error loading Section 2 animation:', error))
+    } else if (currentSlide === 2 && !infrastructureAnimationData) {
+      fetch(`${base}/animations/sec3.json`)
+        .then(response => response.json())
+        .then(data => setInfrastructureAnimationData(data))
+        .catch(error => console.error('Error loading Section 3 animation:', error))
+    }
+  }, [base, currentSlide, bitcoinAnimationData, aiAnimationData, infrastructureAnimationData])
 
   const subheads = [
     "AI is accelerating everything.",
@@ -70,53 +74,53 @@ const Story = () => {
     }
   ]
 
-  const values = [
+  const values = ReactMemo.useMemo(() => [
     {
       number: "01",
       title: "Lean by Design",
       description: "We strip layers, waste, and overhead. Performance comes from subtraction.",
-      icon: Zap
+      icon: "Zap"
     },
     {
       number: "02", 
       title: "No Lock-ins",
       description: "You own your model, your data, your exit path. Always.",
-      icon: Lock
+      icon: "Lock"
     },
     {
       number: "03",
       title: "Every Watt Counts", 
       description: "Efficiency isn't marketing. It's engineering. From Ethiopia to Oregon.",
-      icon: Activity
+      icon: "Activity"
     },
     {
       number: "04",
       title: "Transparency First",
       description: "No surprise bills. No hidden throttling. Just clean compute.",
-      icon: Shield
+      icon: "Shield"
     },
     {
       number: "05",
       title: "Support That Shows Up",
       description: "Real humans. Real help. 3AM included.",
-      icon: Users
+      icon: "Users"
     },
     {
       number: "06",
       title: "Built for Builders",
       description: "We think like you: test, tune, scale, repeat.",
-      icon: Cpu
+      icon: "Cpu"
     }
-  ]
+  ], [])
 
-  const partners = [
+  const partners = ReactMemo.useMemo(() => [
     { name: "OpenAI", logo: "🔵" },
     { name: "Anthropic", logo: "🟣" },
     { name: "Google", logo: "🔴" },
     { name: "Microsoft", logo: "🟦" },
     { name: "Meta", logo: "🔵" },
     { name: "NVIDIA", logo: "🟢" }
-  ]
+  ], [])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -159,13 +163,13 @@ const Story = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             className="flex-1 text-center lg:text-left mb-12 lg:mb-0"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
             >
               <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
                 The world is changing fast<span className="text-primary-500">.</span>
@@ -180,7 +184,7 @@ const Story = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.2 }}
                     className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto lg:mx-0 italic"
                   >
                     {subheads[currentSubhead]}
@@ -192,7 +196,7 @@ const Story = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <div 
@@ -216,7 +220,7 @@ const Story = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="flex-1 flex justify-center lg:justify-end"
           >
             <div 
@@ -228,6 +232,7 @@ const Story = () => {
                 src={`${base}/assets/ai.png`}
                 alt="AI Technology"
                 className="w-full h-full object-contain rounded-xl"
+                loading="lazy"
                 onError={(e) => {
                   // Fallback if image fails to load
                   const target = e.target as HTMLImageElement;
@@ -254,7 +259,7 @@ const Story = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -271,7 +276,7 @@ const Story = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.2 }}
                 className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
               >
                 {/* Text Content */}
@@ -384,7 +389,7 @@ const Story = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -408,7 +413,7 @@ const Story = () => {
                     <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0 mb-4">
                       <span className="text-2xl font-bold text-white">{value.number}</span>
                     </div>
-                    <value.icon className="h-8 w-8 text-primary-500" />
+                    <img src={getIconSrc(value.icon)} alt={value.title} className="h-8 w-8 text-primary-500" loading="lazy" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3 text-center">{value.title}</h3>
                   <p className="text-gray-300 leading-relaxed text-center">{value.description}</p>
@@ -428,7 +433,7 @@ const Story = () => {
                     <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0 mb-4">
                       <span className="text-2xl font-bold text-white">{value.number}</span>
                     </div>
-                    <value.icon className="h-8 w-8 text-primary-500" />
+                    <img src={getIconSrc(value.icon)} alt={value.title} className="h-8 w-8 text-primary-500" loading="lazy" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3 text-center">{value.title}</h3>
                   <p className="text-gray-300 leading-relaxed text-center">{value.description}</p>
@@ -445,7 +450,7 @@ const Story = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -461,7 +466,7 @@ const Story = () => {
                 key={partner.name}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                transition={{ duration: 0.2, delay: idx * 0.05 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.1 }}
                 className="bg-gray-700 rounded-2xl p-6 text-center hover:bg-gray-600 transition-all duration-300"
@@ -480,7 +485,7 @@ const Story = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold text-white mb-6">Ready to Build the Future?</h2>
@@ -504,4 +509,4 @@ const Story = () => {
   )
 }
 
-export default Story 
+export default ReactMemo.memo(Story) 

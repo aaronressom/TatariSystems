@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAssetPath } from '../utils/paths'
 import { getIconSrc } from '../utils/iconMapping'
+import ReactMemo from 'react'
 
 // Custom hook for counting animation
 const useCountUp = (end: number, duration: number = 2000, delay: number = 0) => {
@@ -158,14 +159,14 @@ const Home = () => {
     return () => clearInterval(interval)
   }, [])
 
-  const stats = [
+  const stats = ReactMemo.useMemo(() => [
     { number: 70000, label: "AI Startups Globally", icon: "Users", suffix: "" },
     { number: 4.4, label: "Price Difference", icon: "DollarSign", suffix: "x" },
     { number: 26, label: "Demand Growth by 2030", icon: "TrendingUp", suffix: "x" },
     { number: 99.9, label: "Uptime Guarantee", icon: "Shield", suffix: "%" }
-  ]
+  ], [])
 
-  const problems = [
+  const problems = ReactMemo.useMemo(() => [
     {
       title: "No Uptime Guarantees",
       description: "Users rent capacity from independent hosts with no overarching contract ensuring service continuity",
@@ -184,9 +185,9 @@ const Home = () => {
       icon: "AlertTriangle",
       color: "from-yellow-500 to-yellow-600"
     }
-  ]
+  ], [])
 
-  const solutions = [
+  const solutions = ReactMemo.useMemo(() => [
     {
       title: "Sourcing",
       description: "Aggregates trusted GPU vendors across marketplaces and private clouds",
@@ -205,7 +206,7 @@ const Home = () => {
       icon: "Cpu",
       color: "from-purple-500 to-purple-600"
     }
-  ]
+  ], [])
 
   const competitors = [
     { name: "Vast.ai", price: "$0.89", sla: "No centralized SLA", green: "Host-dependent" },
@@ -227,14 +228,15 @@ const Home = () => {
             alt="Tatari Logo"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.4 }}
             className="mb-8 w-40 h-40 md:w-56 md:h-56 object-contain drop-shadow-2xl"
             style={{ filter: 'drop-shadow(0 0 60px #5D90DC)' }}
+            loading="lazy"
           />
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             className="text-center mb-8"
           >
             <h1 className="text-white text-6xl md:text-8xl font-extrabold mb-6 leading-tight" style={{letterSpacing: '-0.03em'}}>
@@ -278,7 +280,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -306,7 +308,7 @@ const Home = () => {
                 className="text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 bg-primary-700 rounded-full flex items-center justify-center">
-                  <img src={getIconSrc(stat.icon)} alt={stat.label} className="h-8 w-8 object-contain" />
+                  <img src={getIconSrc(stat.icon)} alt={stat.label} className="h-8 w-8 object-contain" loading="lazy" />
                 </div>
                   <div className="text-3xl font-bold text-white mb-2">
                     {stat.number >= 1000 ? count.toLocaleString() : count.toFixed(stat.number % 1 === 0 ? 0 : 1)}{stat.suffix}
@@ -362,7 +364,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -387,7 +389,7 @@ const Home = () => {
                 className="bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-600"
               >
                 <div className={`w-16 h-16 bg-gradient-to-br ${problem.color} rounded-2xl flex items-center justify-center mb-6`}>
-                  <img src={getIconSrc(problem.icon)} alt={problem.title} className="h-8 w-8 object-contain" />
+                  <img src={getIconSrc(problem.icon)} alt={problem.title} className="h-8 w-8 object-contain" loading="lazy" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">{problem.title}</h3>
                 <p className="text-gray-300 leading-relaxed">{problem.description}</p>
@@ -403,7 +405,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -428,7 +430,7 @@ const Home = () => {
                 className="bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-600 hover:shadow-xl transition-shadow"
               >
                 <div className={`w-16 h-16 bg-gradient-to-br ${solution.color} rounded-2xl flex items-center justify-center mb-6`}>
-                  <img src={getIconSrc(solution.icon)} alt={solution.title} className="h-8 w-8 object-contain" />
+                  <img src={getIconSrc(solution.icon)} alt={solution.title} className="h-8 w-8 object-contain" loading="lazy" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">{solution.title}</h3>
                 <p className="text-gray-300 leading-relaxed">{solution.description}</p>
@@ -450,11 +452,11 @@ const Home = () => {
               </p>
               <div className="space-y-2">
                 <div className="flex items-center">
-                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-2 object-contain" />
+                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-2 object-contain" loading="lazy" />
                   <span className="text-sm text-gray-300">50% of GPUs are idle globally</span>
                 </div>
                 <div className="flex items-center">
-                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-2 object-contain" />
+                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-2 object-contain" loading="lazy" />
                   <span className="text-sm text-gray-300">Aggregation unlocks significant capacity</span>
                 </div>
               </div>
@@ -486,7 +488,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -542,7 +544,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -567,11 +569,11 @@ const Home = () => {
               <h3 className="text-2xl font-bold text-white mb-4">AI/ML Startups</h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
-                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" />
+                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" loading="lazy" />
                   <span className="text-gray-300">Need scalable, cost-effective inference & training compute</span>
                 </li>
                 <li className="flex items-start">
-                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" />
+                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" loading="lazy" />
                   <span className="text-gray-300">Prefer flexible, low-commitment infrastructure</span>
                 </li>
               </ul>
@@ -588,11 +590,11 @@ const Home = () => {
               <h3 className="text-2xl font-bold text-white mb-4">Academic Labs & Research</h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
-                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" />
+                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" loading="lazy" />
                   <span className="text-gray-300">Require access to powerful GPUs for experimentation</span>
                 </li>
                 <li className="flex items-start">
-                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" />
+                  <img src={getIconSrc("CheckCircle")} alt="Check" className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0 object-contain" loading="lazy" />
                   <span className="text-gray-300">Value latency and geographic proximity</span>
                 </li>
               </ul>
@@ -607,7 +609,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
@@ -668,7 +670,7 @@ const Home = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-bold text-white mb-6">
@@ -712,4 +714,4 @@ const Home = () => {
   )
 }
 
-export default Home 
+export default ReactMemo.memo(Home) 

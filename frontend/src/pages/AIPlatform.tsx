@@ -6,12 +6,12 @@ const AIPlatform = () => (
   <div className="min-h-screen bg-white pt-navbar">
     <Navbar />
     <div className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} viewport={{ once: true }} className="mb-16">
         <h1 className="text-4xl font-extrabold text-secondary-900 mb-6">Supercharge Your AI Startup with Reliable, Affordable Compute</h1>
         <p className="text-lg text-secondary-700 mb-8">Tatari gives you the power and flexibility to scale your models—without the enterprise price tag.</p>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.05 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">The Challenge for AI Startups</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-primary-50 rounded-lg p-6 shadow text-center">
@@ -34,7 +34,7 @@ const AIPlatform = () => (
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.1 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">How Tatari Empowers AI Startups</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-blue-50 rounded-lg p-6 shadow">
@@ -52,7 +52,7 @@ const AIPlatform = () => (
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.2 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">Why AI Startups Choose Tatari</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="bg-white rounded-lg p-6 shadow border">
@@ -77,7 +77,7 @@ const AIPlatform = () => (
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.3 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">Simple, Transparent Pricing for Startups</h2>
         <div className="bg-white rounded-xl p-8 shadow-lg max-w-2xl mx-auto">
           <div className="space-y-4">
@@ -115,7 +115,7 @@ const AIPlatform = () => (
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.5 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.4 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">See How Tatari Compares</h2>
         <div className="overflow-x-auto">
           <table className="w-full bg-white rounded-xl shadow overflow-hidden">
@@ -157,7 +157,7 @@ const AIPlatform = () => (
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.6 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.5 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">Built for AI Innovators</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-blue-50 rounded-lg p-6 shadow">
@@ -177,7 +177,7 @@ const AIPlatform = () => (
         </div>
       </motion.section>
 
-      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }} viewport={{ once: true }} className="mb-16">
+      <motion.section initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.6 }} viewport={{ once: true }} className="mb-16">
         <h2 className="text-2xl font-bold text-primary-600 mb-6">Ready to Scale Your AI Startup?</h2>
         <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-lg p-8 shadow">
           <ul className="space-y-4 text-secondary-700 mb-6">

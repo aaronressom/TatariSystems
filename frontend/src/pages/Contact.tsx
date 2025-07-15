@@ -95,7 +95,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 className="w-full flex flex-col items-center text-center py-24"
               >
                 <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-8 drop-shadow-xl">Let's Talk Compute</h1>
@@ -109,7 +109,7 @@ const Contact = () => {
                   className="glass-button bg-brand-cyan/80 hover:bg-brand-blue-1/80 text-white font-bold text-2xl px-12 py-6 rounded-2xl shadow-2xl transition-all duration-200 flex items-center gap-3 backdrop-blur-xl"
                   onClick={() => setStage('types')}
                 >
-                  Contact Us <ArrowRight className="h-7 w-7 text-white" />
+                  I’m interested in <ArrowRight className="h-7 w-7 text-white" />
                 </motion.button>
               </motion.div>
             )}
@@ -120,7 +120,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 className="w-full flex flex-col items-center py-16"
               >
                 <h2 className="text-3xl font-bold text-white mb-12">How can we help you?</h2>
@@ -157,7 +157,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 className="w-full max-w-2xl mx-auto py-16"
               >
                 <div className="flex items-center gap-4 mb-8">
@@ -215,6 +215,7 @@ const Contact = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
                       className="text-green-400 text-center font-semibold mt-2 text-lg"
                     >
                       Message sent! We'll be in touch soon.

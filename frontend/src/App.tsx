@@ -1,21 +1,22 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
-import Home from './pages/Home'
-import About from './pages/About'
-import AIPlatform from './pages/AIPlatform'
-import Contact from './pages/Contact'
-import OmniStack from './pages/OmniStack'
-import Pricing from './pages/Pricing'
-import TrainingStack from './pages/TrainingStack'
-import InferenceStack from './pages/InferenceStack'
-import Story from './pages/Story'
-import Team from './pages/Team'
-import Careers from './pages/Careers'
-import Blog from './pages/Blog'
-import PressReleases from './pages/PressReleases'
-import CaseStudies from './pages/CaseStudies'
-import Mining from './pages/Mining'
+import React, { Suspense } from 'react'
+const Home = React.lazy(() => import('./pages/Home'))
+const About = React.lazy(() => import('./pages/About'))
+const AIPlatform = React.lazy(() => import('./pages/AIPlatform'))
+const Contact = React.lazy(() => import('./pages/Contact'))
+const OmniStack = React.lazy(() => import('./pages/OmniStack'))
+const Pricing = React.lazy(() => import('./pages/Pricing'))
+const TrainingStack = React.lazy(() => import('./pages/TrainingStack'))
+const InferenceStack = React.lazy(() => import('./pages/InferenceStack'))
+const Story = React.lazy(() => import('./pages/Story'))
+const Team = React.lazy(() => import('./pages/Team'))
+const Careers = React.lazy(() => import('./pages/Careers'))
+const Blog = React.lazy(() => import('./pages/Blog'))
+const PressReleases = React.lazy(() => import('./pages/PressReleases'))
+const CaseStudies = React.lazy(() => import('./pages/CaseStudies'))
+const Mining = React.lazy(() => import('./pages/Mining'))
 
 // Custom hook to scroll to top on route change
 const useScrollToTop = () => {
@@ -31,14 +32,13 @@ function App() {
 
   return (
     <AnimatePresence mode="wait">
-      <>
+      <Suspense fallback={<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',background:'#000',color:'#fff',fontSize:24}}>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ai-platform" element={<AIPlatform />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/omni-stack" element={<OmniStack />} />
-          <Route path="/pricing" element={<Pricing />} />
           <Route path="/training-stack" element={<TrainingStack />} />
           <Route path="/inference-stack" element={<InferenceStack />} />
           <Route path="/story" element={<Story />} />
@@ -49,7 +49,7 @@ function App() {
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/mining" element={<Mining />} />
         </Routes>
-      </>
+      </Suspense>
     </AnimatePresence>
   )
 }

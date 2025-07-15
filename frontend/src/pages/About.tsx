@@ -33,7 +33,7 @@ const About = () => {
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.3 }}
             viewport={{ once: true }}
             className="mb-16"
           >
@@ -47,7 +47,7 @@ const About = () => {
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.05 }}
             viewport={{ once: true }}
             className="mb-16"
           >
@@ -69,7 +69,7 @@ const About = () => {
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             viewport={{ once: true }}
             className="mb-16"
           >
@@ -113,7 +113,7 @@ const About = () => {
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
             viewport={{ once: true }}
             className="bg-primary-50 rounded-2xl p-8 shadow-lg text-center"
           >
