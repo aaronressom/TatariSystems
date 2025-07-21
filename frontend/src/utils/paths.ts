@@ -1,12 +1,8 @@
-// Utility function to handle asset paths for GitHub Pages deployment
+// Utility function to handle asset paths for GitHub Pages and Render deployment
 export const getAssetPath = (path: string): string => {
-  const basePath = process.env.NODE_ENV === 'production' ? '/TatariSystems' : '';
-  const fullPath = `${basePath}${path}`;
-  
-  // Add cache busting parameter for production
-  const cacheBuster = process.env.NODE_ENV === 'production' ? `?v=${Date.now()}` : '';
-  
-  return `${fullPath}${cacheBuster}`;
+  const basePath = import.meta.env.VITE_BASE_PATH || '/';
+  // Remove trailing slash from basePath and ensure path starts with /
+  return `${basePath.replace(/\/$/, '')}${path}`;
 };
 
 // Debug function to check all asset paths
