@@ -5,7 +5,8 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',                                 // ← change this
+  // Use VITE_BASE_PATH if set (e.g. "/TatariSystems/" on GH Pages), otherwise root
+  base: import.meta.env.VITE_BASE_PATH || '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -26,9 +27,11 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       onwarn(warning, warn) {
+        // Suppress certain warnings
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') return
         warn(warning)
       }
     }
   },
 })
+
