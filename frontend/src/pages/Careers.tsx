@@ -94,8 +94,12 @@ const Careers = () => {
           {/* Hero Section - 4 Alternating Rows */}
           <div className="w-full max-w-6xl mx-auto mb-24 flex flex-col gap-16">
             {whyTatari.map((item, idx) => (
-              <div
+              <motion.div
                 key={item.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: idx * 0.1 }}
                 className={`flex flex-col md:flex-row items-center ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''} gap-0 md:gap-12`}
                 style={{ minHeight: '340px' }}
               >
@@ -114,19 +118,29 @@ const Careers = () => {
                     <p className="text-gray-300 text-lg leading-relaxed">{item.description}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-center mb-20"
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Our Mission</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-16">
               Democratize access to advanced compute for builders everywhere.
             </p>
             <div className="flex flex-col lg:flex-row max-w-6xl mx-auto">
               {whyTatari.map((item, idx) => (
-                <div
+                <motion.div
                   key={item.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: idx * 0.1 }}
                   className={`flex-1 flex flex-col items-center px-0 lg:px-8 mb-12 lg:mb-0
                     ${idx !== 0 ? 'border-l border-gray-400' : ''}
                     ${idx !== whyTatari.length - 1 ? 'border-r border-gray-400' : ''}
@@ -135,14 +149,20 @@ const Careers = () => {
                   <img src={getIconSrc(item.icon)} alt={item.title} className="h-8 w-8 object-contain mb-4" />
                   <h3 className="text-xl font-bold text-white mb-3 text-center">{item.title}</h3>
                   <p className="text-gray-300 leading-relaxed text-center">{item.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Remove the Open Roles Section */}
 
-          <div className="text-center mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-center mb-24"
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">The Tatari Way</h2>
             {/* Animated subheadline */}
             <div className="h-12 mb-8 flex items-center justify-center">
@@ -162,7 +182,7 @@ const Careers = () => {
             <p className="text-center text-gray-300 mt-12 italic">
               We take our mission seriously — but never take ourselves too seriously.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

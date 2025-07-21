@@ -21,28 +21,25 @@ const Story = () => {
   const aiImageRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
-  // Get the base path for GitHub Pages deployment
-  const base = (import.meta as any).env?.PROD ? '/TatariSystems' : ''
-
   // Lazy-load Lottie animations only when the relevant slide is active
   useEffect(() => {
     if (currentSlide === 0 && !bitcoinAnimationData) {
-      fetch(`${base}/animations/sec1.json`)
+      fetch(getAssetPath('animations/sec1.json'))
         .then(response => response.json())
         .then(data => setBitcoinAnimationData(data))
         .catch(error => console.error('Error loading Section 1 animation:', error))
     } else if (currentSlide === 1 && !aiAnimationData) {
-      fetch(`${base}/animations/sec2.json`)
+      fetch(getAssetPath('animations/sec2.json'))
         .then(response => response.json())
         .then(data => setAiAnimationData(data))
         .catch(error => console.error('Error loading Section 2 animation:', error))
     } else if (currentSlide === 2 && !infrastructureAnimationData) {
-      fetch(`${base}/animations/sec3.json`)
+      fetch(getAssetPath('animations/sec3.json'))
         .then(response => response.json())
         .then(data => setInfrastructureAnimationData(data))
         .catch(error => console.error('Error loading Section 3 animation:', error))
     }
-  }, [base, currentSlide, bitcoinAnimationData, aiAnimationData, infrastructureAnimationData])
+  }, [currentSlide, bitcoinAnimationData, aiAnimationData, infrastructureAnimationData])
 
   const subheads = [
     "AI is accelerating everything.",
@@ -415,7 +412,9 @@ const Story = () => {
                     <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0 mb-4">
                       <span className="text-2xl font-bold text-white">{value.number}</span>
                     </div>
-                    <img src={getIconSrc(value.icon)} alt={value.title} className="h-8 w-8 text-primary-500" loading="lazy" />
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 mb-2">
+                      <img src={getIconSrc(value.icon)} alt={value.title} className="w-7 h-7 object-contain" loading="lazy" />
+                    </div>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3 text-center">{value.title}</h3>
                   <p className="text-gray-300 leading-relaxed text-center">{value.description}</p>
@@ -435,7 +434,9 @@ const Story = () => {
                     <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0 mb-4">
                       <span className="text-2xl font-bold text-white">{value.number}</span>
                     </div>
-                    <img src={getIconSrc(value.icon)} alt={value.title} className="h-8 w-8 text-primary-500" loading="lazy" />
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 mb-2">
+                      <img src={getIconSrc(value.icon)} alt={value.title} className="w-7 h-7 object-contain" loading="lazy" />
+                    </div>
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3 text-center">{value.title}</h3>
                   <p className="text-gray-300 leading-relaxed text-center">{value.description}</p>
@@ -473,8 +474,10 @@ const Story = () => {
                 whileHover={{ scale: 1.1 }}
                 className="bg-gray-700 rounded-2xl p-6 text-center hover:bg-gray-600 transition-all duration-300"
               >
-                <div className="text-4xl mb-4">{partner.logo}</div>
-                <div className="text-white font-semibold">{partner.name}</div>
+                <div className="flex items-center justify-center mx-auto mb-4 w-16 h-16 rounded-full bg-white/10">
+                  <span className="text-4xl md:text-5xl lg:text-6xl flex items-center justify-center w-full h-full">{partner.logo}</span>
+                </div>
+                <div className="text-white font-semibold mt-2">{partner.name}</div>
               </motion.div>
             ))}
           </div>
