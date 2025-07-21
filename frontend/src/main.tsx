@@ -10,7 +10,7 @@ const basename = import.meta.env.VITE_BASE_PATH || '/';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter basename={basename}>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

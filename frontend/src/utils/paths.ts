@@ -1,8 +1,6 @@
 // Utility function to handle asset paths for GitHub Pages and Render deployment
 export const getAssetPath = (path: string): string => {
-  const basePath = import.meta.env.VITE_BASE_PATH || '/';
-  // Remove trailing slash from basePath and leading slash from path, then join
-  return `${basePath.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+  return `/${path.replace(/^\//, '')}`;
 };
 
 // Debug function to check all asset paths
