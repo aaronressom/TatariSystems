@@ -119,7 +119,7 @@ const Navbar = () => {
 
   const companyDropdown = [
     {
-      title: 'Our Story',
+      title: 'Story',
       description: 'Our founding story, vision, and mission to change AI.',
       color: 'bg-brand-blue-1',
       cta: 'Read Our Story',
