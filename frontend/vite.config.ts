@@ -6,7 +6,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   // Use VITE_BASE_PATH if set (e.g. "/TatariSystems/" on GH Pages), otherwise root
-  base: import.meta.env.VITE_BASE_PATH || '/',
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
