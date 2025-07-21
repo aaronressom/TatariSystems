@@ -328,7 +328,7 @@ const Navbar = () => {
                 </div>
                 <div 
                   onClick={() => navigate(product.ctaHref)} 
-                  className="inline-block mt-auto bg-white text-brand-blue-2 font-semibold px-3 py-2 rounded-lg hover:bg-brand-blue-1 hover:text-white transition text-sm cursor-pointer"
+                  className="inline-block mt-auto bg-white text-brand-blue-2 font-semibold px-3 py-2 rounded-lg hover:bg-primary-800 hover:text-white transition text-sm cursor-pointer"
                 >
                   {product.cta} &rarr;
                 </div>
@@ -365,26 +365,10 @@ const Navbar = () => {
                 </div>
                 <div 
                   onClick={() => navigate(company.ctaHref)} 
-                  className="inline-block mt-auto bg-white text-brand-blue-2 font-semibold px-3 py-2 rounded-lg hover:bg-brand-blue-1 hover:text-white transition text-sm cursor-pointer"
+                  className="inline-block mt-auto bg-white text-brand-blue-2 font-semibold px-3 py-2 rounded-lg hover:bg-primary-800 hover:text-white transition text-sm cursor-pointer"
                 >
                   {company.cta} &rarr;
                 </div>
-              </div>
-              {/* Subsections */}
-              <div className="flex flex-col gap-2">
-                {company.subsections.map((sub) => (
-                  <div 
-                    onClick={() => navigate(sub.href)} 
-                    className="flex items-start gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition min-w-0 cursor-pointer" 
-                    key={sub.label}
-                  >
-                    <img src={getIconSrc(sub.icon)} alt={sub.label} className="h-5 w-5 flex-shrink-0 object-contain" />
-                    <div>
-                      <div className="font-semibold text-white text-sm">{sub.label}</div>
-                      <div className="text-xs text-white/70">{sub.desc}</div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           ))}
@@ -406,26 +390,10 @@ const Navbar = () => {
                 </div>
                 <div 
                   onClick={() => navigate(learn.ctaHref)} 
-                  className="inline-block mt-auto bg-white text-brand-blue-2 font-semibold px-3 py-2 rounded-lg hover:bg-brand-blue-1 hover:text-white transition text-sm cursor-pointer"
+                  className="inline-block mt-auto bg-white text-brand-blue-2 font-semibold px-3 py-2 rounded-lg hover:bg-primary-800 hover:text-white transition text-sm cursor-pointer"
                 >
                   {learn.cta} &rarr;
                 </div>
-              </div>
-              {/* Subsections */}
-              <div className="flex flex-col gap-2">
-                {learn.subsections.map((sub) => (
-                  <div 
-                    onClick={() => navigate(sub.href)} 
-                    className="flex items-start gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition min-w-0 cursor-pointer" 
-                    key={sub.label}
-                  >
-                    <img src={getIconSrc(sub.icon)} alt={sub.label} className="h-5 w-5 flex-shrink-0 object-contain" />
-                    <div>
-                      <div className="font-semibold text-white text-sm">{sub.label}</div>
-                      <div className="text-xs text-white/70">{sub.desc}</div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           ))}
@@ -436,10 +404,10 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16 relative w-full glass-navbar">
           {/* Logo */}
-          <div className="absolute left-0 top-0 h-full flex items-center z-10">
+          <div className="flex items-center h-full z-10">
             <Link
               to="/"
               style={{ textDecoration: 'none' }}
@@ -466,15 +434,9 @@ const Navbar = () => {
             {mobileMenuOpen ? <X className="h-7 w-7 text-white" /> : <Menu className="h-7 w-7 text-white" />}
           </button>
 
-          {/* Centered Navigation (desktop only) */}
+          {/* Centered Dropdown Tabs (desktop only) */}
           <div className="flex-1 flex justify-center">
-            <div className="hidden sm:flex items-center space-x-6">
-              <div
-                className="text-base font-medium transition-colors duration-200 text-white/80 hover:text-primary-500 cursor-pointer"
-                onClick={() => navigate('/')}
-              >
-                Home
-              </div>
+            <div className="hidden sm:flex items-center space-x-8">
               {megaMenus.map((dropdown) => (
                 <div
                   key={dropdown.label}
@@ -494,6 +456,16 @@ const Navbar = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Contact Us Button (desktop only) */}
+          <div className="hidden sm:flex items-center ml-auto">
+            <button
+              className="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-2 rounded-xl shadow-lg transition-all duration-200 text-base"
+              onClick={() => navigate('/contact')}
+            >
+              Contact Us
+            </button>
           </div>
 
           {/* Invisible right spacer to balance logo (desktop only) */}
@@ -543,12 +515,6 @@ const Navbar = () => {
               </button>
             </div>
             <div className="flex flex-col gap-2 px-6 py-6">
-              <button
-                className="text-base font-medium text-white/90 hover:text-primary-500 text-left py-2"
-                onClick={() => { navigate('/'); setMobileMenuOpen(false); }}
-              >
-                Home
-              </button>
               {megaMenus.map((dropdown) => (
                 <div key={dropdown.label} className="flex flex-col">
                   <span className="text-base font-semibold text-white/80 mt-4 mb-2">{dropdown.label}</span>
@@ -582,6 +548,13 @@ const Navbar = () => {
                   ))}
                 </div>
               ))}
+              {/* Contact Us Button (mobile only) */}
+              <button
+                className="mt-6 bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all duration-200 text-base"
+                onClick={() => { navigate('/contact'); setMobileMenuOpen(false); }}
+              >
+                Contact Us
+              </button>
             </div>
           </motion.div>
         )}
