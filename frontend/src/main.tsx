@@ -5,7 +5,8 @@ import App from './App.tsx'
 import './index.css'
 
 // Get the basename for GitHub Pages deployment
-const basename = import.meta.env.PROD ? '/TatariSystems' : ''
+const basename = import.meta.env.VITE_BASE_PATH || '/';
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
