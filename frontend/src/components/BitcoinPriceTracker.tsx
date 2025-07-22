@@ -40,22 +40,14 @@ const BitcoinPriceTracker: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Get API base URL from environment or use default
-  const getApiBaseUrl = () => {
-    // In development, use the proxy configured in vite.config.ts
-    if (import.meta.env.DEV) {
-      return '';
-    }
-    // In production, use the environment variable or a default backend URL
-    return import.meta.env.VITE_API_URL || 'https://your-backend-domain.com';
-  };
+  // Remove getApiBaseUrl and use a hard-coded URL
+  const apiBaseUrl = "https://tatari-backend.onrender.com";
 
   // fetch + animate
   const fetchBitcoinPrice = async () => {
     setError(null);
 
     try {
-      const apiBaseUrl = getApiBaseUrl();
       const apiUrl = `${apiBaseUrl}/api/v1/bitcoin/price`;
       
       console.log('Fetching Bitcoin price from:', apiUrl);
