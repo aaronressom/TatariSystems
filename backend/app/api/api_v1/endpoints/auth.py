@@ -130,7 +130,7 @@ async def employee_login(
     ]
     
     # Shared password for all employees - from environment variable
-    shared_password = settings.EMPLOYEE_PASSWORD
+    shared_password = settings.EMPLOYEE_PASSWORD.strip() if settings.EMPLOYEE_PASSWORD else ""
     
     # TEMPORARY FIX: Use hardcoded password for Render
     if not shared_password or shared_password == "":
