@@ -132,6 +132,12 @@ async def employee_login(
     # Shared password for all employees - from environment variable
     shared_password = settings.EMPLOYEE_PASSWORD
     
+    # Debug logging for Render deployment
+    print(f"DEBUG: Password length on server: {len(shared_password) if shared_password else 0}")
+    print(f"DEBUG: Password first 4 chars: '{shared_password[:4] if shared_password else 'none'}'")
+    print(f"DEBUG: Input password: '{login_data.password}'")
+    print(f"DEBUG: Password match: {login_data.password == shared_password}")
+    
     # Validate email and password
     if login_data.email.lower() not in [email.lower() for email in authorized_emails]:
         raise HTTPException(
@@ -152,7 +158,7 @@ async def employee_login(
         )
     
     # Log successful login attempt (without sensitive data)
-    print(f"Employee login attempt from: {login_data.email.lower()}")  # Updated for redeploy
+    print(f"Employee login attempt from: {login_data.email.lower()}")
     
     # Create access token (using email as user identifier)
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -184,6 +190,8 @@ async def employee_auth_status() -> Any:
         "status": "configured" if password_configured else "not_configured",
         "password_set": password_configured,
         "password_configured": password_configured,
+        "password_length": len(settings.EMPLOYEE_PASSWORD) if settings.EMPLOYEE_PASSWORD else 0,
+        "password_first_4": settings.EMPLOYEE_PASSWORD[:4] if settings.EMPLOYEE_PASSWORD else "none",
         "authorized_emails_count": len(authorized_emails),
         "environment": settings.ENVIRONMENT
     } 
