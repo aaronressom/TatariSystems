@@ -132,17 +132,6 @@ async def employee_login(
     # Shared password for all employees - from environment variable
     shared_password = settings.EMPLOYEE_PASSWORD.strip() if settings.EMPLOYEE_PASSWORD else ""
     
-    # TEMPORARY FIX: Use hardcoded password for Render
-    if not shared_password or shared_password == "":
-        shared_password = "tatariadmin"
-        print("DEBUG: Using hardcoded password for Render")
-    
-    # Debug logging for Render deployment
-    print(f"DEBUG: Password length on server: {len(shared_password) if shared_password else 0}")
-    print(f"DEBUG: Password first 4 chars: '{shared_password[:4] if shared_password else 'none'}'")
-    print(f"DEBUG: Input password: '{login_data.password}'")
-    print(f"DEBUG: Password match: {login_data.password == shared_password}")
-    
     # Debug logging for Render deployment
     print(f"DEBUG: Password length on server: {len(shared_password) if shared_password else 0}")
     print(f"DEBUG: Password first 4 chars: '{shared_password[:4] if shared_password else 'none'}'")
@@ -200,24 +189,8 @@ async def employee_auth_status() -> Any:
     return {
         "status": "configured" if password_configured else "not_configured",
         "password_set": password_configured,
-        "password_configured": password_configured,
-        "password_length": len(settings.EMPLOYEE_PASSWORD) if settings.EMPLOYEE_PASSWORD else 0,
-        "password_first_4": settings.EMPLOYEE_PASSWORD[:4] if settings.EMPLOYEE_PASSWORD else "none",
         "authorized_emails_count": len(authorized_emails),
         "environment": settings.ENVIRONMENT
     }
 
-@router.get("/debug-password")
-async def debug_password() -> Any:
-    """
-    Debug endpoint to check password configuration.
-    """
-    import os
-    
-    return {
-        "env_password": os.getenv("PASSWORD", "NOT_SET"),
-        "settings_password": settings.EMPLOYEE_PASSWORD,
-        "env_password_length": len(os.getenv("PASSWORD", "")) if os.getenv("PASSWORD") else 0,
-        "settings_password_length": len(settings.EMPLOYEE_PASSWORD) if settings.EMPLOYEE_PASSWORD else 0,
-        "environment": settings.ENVIRONMENT
-    } 
+ 
