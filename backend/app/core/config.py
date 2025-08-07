@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     DEBUG: bool = os.getenv("DEBUG", "True").lower() == "true"
     
     # Employee Authentication
-    EMPLOYEE_PASSWORD: str = os.getenv("PASSWORD", "hP0!5W8-s3dC*2L$")
+    EMPLOYEE_PASSWORD: str = os.getenv("PASSWORD", "")
     
     class Config:
         case_sensitive = True

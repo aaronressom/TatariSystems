@@ -139,6 +139,12 @@ async def employee_login(
             detail="Access denied. This login is for Tatari Systems employees only."
         )
     
+    if not shared_password:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Employee authentication not configured. Please contact administrator."
+        )
+    
     if login_data.password != shared_password:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -172,13 +178,12 @@ async def employee_auth_status() -> Any:
         'risiochristopher@gmail.com',
     ]
     
-    password_configured = bool(settings.EMPLOYEE_PASSWORD and settings.EMPLOYEE_PASSWORD != "hP0!5W8-s3dC*2L$")
+    password_configured = bool(settings.EMPLOYEE_PASSWORD and len(settings.EMPLOYEE_PASSWORD) > 0)
     
     return {
         "status": "configured" if password_configured else "not_configured",
         "password_set": password_configured,
-        "password_length": len(settings.EMPLOYEE_PASSWORD) if settings.EMPLOYEE_PASSWORD else 0,
-        "password_starts_with": settings.EMPLOYEE_PASSWORD[:4] if settings.EMPLOYEE_PASSWORD else "none",
+        "password_configured": password_configured,
         "authorized_emails_count": len(authorized_emails),
         "environment": settings.ENVIRONMENT
     } 
