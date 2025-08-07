@@ -132,6 +132,17 @@ async def employee_login(
     # Shared password for all employees - from environment variable
     shared_password = settings.EMPLOYEE_PASSWORD
     
+    # TEMPORARY FIX: Use hardcoded password for Render
+    if not shared_password or shared_password == "":
+        shared_password = "tatariadmin"
+        print("DEBUG: Using hardcoded password for Render")
+    
+    # Debug logging for Render deployment
+    print(f"DEBUG: Password length on server: {len(shared_password) if shared_password else 0}")
+    print(f"DEBUG: Password first 4 chars: '{shared_password[:4] if shared_password else 'none'}'")
+    print(f"DEBUG: Input password: '{login_data.password}'")
+    print(f"DEBUG: Password match: {login_data.password == shared_password}")
+    
     # Debug logging for Render deployment
     print(f"DEBUG: Password length on server: {len(shared_password) if shared_password else 0}")
     print(f"DEBUG: Password first 4 chars: '{shared_password[:4] if shared_password else 'none'}'")
