@@ -75,10 +75,18 @@ const Navbar = () => {
       subsections: [],
     },
     {
-      title: 'Compute',
-      description: 'Elastic GPU compute for training and inference.',
+      title: 'Infrastructure',
+      description: 'Enterprise-grade infrastructure and compute solutions.',
       color: 'bg-brand-blue-1',
-      cta: 'View AI Compute',
+      cta: 'View Infrastructure',
+      ctaHref: '/infrastructure',
+      subsections: [],
+    },
+    {
+      title: 'Compute',
+      description: 'Elastic GPU compute for training and inference solutions.',
+      color: 'bg-brand-blue-1',
+      cta: 'View Compute',
       ctaHref: '/ai-compute',
       subsections: [],
     },
@@ -497,7 +505,7 @@ const Navbar = () => {
                 <div key={dropdown.label} className="flex flex-col">
                   <span className="text-base font-semibold text-white/80 mt-4 mb-2">{dropdown.label}</span>
                   {/* Render dropdown content as flat links for mobile */}
-                  {dropdown.label === 'Products' && productDropdown.map((item) => (
+                  {dropdown.label === 'Tatari AI' && productDropdown.map((item) => (
                     <button
                       key={item.title}
                       className="text-white/80 hover:text-primary-500 text-left py-2 pl-4"

@@ -289,9 +289,9 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ scale: 1.03 }}
               className="group bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-2xl hover:shadow-3xl transform flex items-center justify-center cursor-pointer"
-              onClick={() => navigate('/omni-stack')}
+              onClick={() => navigate('/explore-our-tech')}
             >
-              Explore Omni Stack
+              Explore Our Tech
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -362,7 +362,7 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                onClick={() => navigate('/omni-stack')}
+                onClick={() => navigate('/explore-our-tech')}
                 className="group cursor-pointer bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-primary-600 transition-all"
               >
                 <div className="relative h-48 bg-gray-700">
@@ -518,9 +518,9 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              onClick={() => navigate('/omni-stack')}
+              onClick={() => navigate('/explore-our-tech')}
             >
-              Discover Omni Stack
+              Explore Our Tech
             </motion.div>
             <motion.div
               className="group text-white hover:underline font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center cursor-pointer"
@@ -565,7 +565,7 @@ const Home = () => {
                 className="group bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-2xl hover:shadow-3xl transform flex items-center justify-center cursor-pointer"
                 whileHover={{ scale: 1.05, boxShadow: '0 12px 32px 0 rgba(80,124,187,0.25)' }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => navigate('/omni-stack')}
+                onClick={() => navigate('/explore-our-tech')}
               >
                 Get Started Free
                 <motion.span whileHover={{ x: 6 }} transition={{ type: 'spring', stiffness: 300 }}>

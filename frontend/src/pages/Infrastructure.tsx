@@ -4,25 +4,25 @@ import { ArrowRight } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom'
 
-const Mining = () => {
+const Infrastructure = () => {
   const navigate = useNavigate()
 
-  const operationalFocus = [
+  const focusAreas = [
     {
-      title: 'Efficiency',
-      description: 'Optimized energy utilization and hardware lifecycle management.',
-    },
-    {
-      title: 'Sustainability',
-      description: 'Hydro-based, renewable-forward power sourcing.',
+      title: 'Power Efficiency',
+      description: 'Renewable-forward sourcing and PUE-minded design.',
     },
     {
       title: 'Scalability',
-      description: 'Modular deployments that inform future AI clusters.',
+      description: 'Modular capacity that grows with demand.',
     },
     {
-      title: 'Resilience',
-      description: 'Uptime-oriented design with proactive monitoring.',
+      title: 'Connectivity',
+      description: 'Regional peering and direct fiber routes to major hubs.',
+    },
+    {
+      title: 'Security & Reliability',
+      description: 'Tier-III-oriented principles for future deployment.',
     },
   ]
 
@@ -43,7 +43,7 @@ const Mining = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight"
           >
-            Sustainable, High-Efficiency Compute for the Digital Economy
+            Building the Backbone of Africa's AI and Compute Future
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -51,12 +51,12 @@ const Mining = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto"
           >
-            Tatari's mining operations validate our core thesis: sustainable energy + optimized hardware = reliable, low-cost compute at scale.
+            We're developing modular, energy-efficient infrastructure designed for high-density GPU workloads—starting in Ethiopia.
           </motion.p>
         </div>
       </section>
 
-      {/* Why Mining Section */}
+      {/* Vision Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -65,15 +65,15 @@ const Mining = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why Mining</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Vision</h2>
             <p className="text-lg text-gray-300 leading-relaxed">
-              Mining is our proof-of-concept for efficient, high-density compute. By leveraging Ethiopia's renewable energy, we demonstrate low cost per kWh and disciplined thermal design—foundations we extend to AI compute.
+              Tatari integrates renewable power, efficient cooling, and modular architecture to deliver world-class compute capacity at a fraction of global costs.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Operational Focus Section */}
+      {/* Focus Areas Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -83,10 +83,10 @@ const Mining = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Operational Focus</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Focus Areas</h2>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {operationalFocus.map((item, idx) => (
+            {focusAreas.map((item, idx) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -104,7 +104,7 @@ const Mining = () => {
         </div>
       </section>
 
-      {/* Looking Ahead Section */}
+      {/* Roadmap Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -113,17 +113,17 @@ const Mining = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Looking Ahead</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Roadmap</h2>
             <p className="text-lg text-gray-300 leading-relaxed mb-8">
-              Operational learnings in power, cooling, and fleet management directly inform Tatari's AI infrastructure roadmap.
+              We're engaging with energy partners, network providers, and hardware suppliers to establish a sustainable, scalable compute hub in East Africa.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => navigate('/infrastructure')}
+              onClick={() => navigate('/contact')}
               className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl"
             >
-              Explore Infrastructure
+              Contact Us
               <ArrowRight className="h-5 w-5" />
             </motion.button>
           </motion.div>
@@ -133,4 +133,4 @@ const Mining = () => {
   )
 }
 
-export default Mining
+export default Infrastructure
