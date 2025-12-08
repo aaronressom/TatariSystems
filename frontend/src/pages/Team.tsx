@@ -34,7 +34,7 @@ const executiveTeam = [
 const extendedLeadership = [
   { 
     name: 'Glodi Karagi', 
-    role: 'Chief Technology Officer', 
+    role: 'Chief of Business Development', 
     img: 'karagi.jpg',
     linkedin: 'https://linkedin.com/in/glodi-karagi',
     bio: '/team/glodi-karagi'
