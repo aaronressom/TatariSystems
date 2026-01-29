@@ -332,9 +332,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="w-full">
-        <div className="flex items-center h-16 w-full glass-navbar px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center h-16 relative w-full glass-navbar px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <div className="flex items-center h-full">
+          <div className="flex items-center h-full z-10">
             <div
               className="flex items-center space-x-3 group cursor-pointer"
               onClick={() => { navigate('/'); setMobileMenuOpen(false); }}
@@ -350,9 +350,18 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* Hamburger menu button (mobile only) */}
+          <button
+            className="lg:hidden absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMobileMenuOpen((v) => !v)}
+          >
+            {mobileMenuOpen ? <X className="h-7 w-7 text-white" /> : <Menu className="h-7 w-7 text-white" />}
+          </button>
+
           {/* Centered Dropdown Tabs (desktop only) */}
-          <div className="hidden lg:flex flex-1 justify-center min-w-0 px-4">
-            <div className="flex items-center space-x-4 md:space-x-6 lg:space-x-8 whitespace-nowrap">
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <div className="hidden lg:flex items-center space-x-4 md:space-x-6 lg:space-x-8">
               {megaMenus.map((dropdown) => (
                 dropdown.content ? (
                   <div
@@ -388,8 +397,8 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right-side buttons (desktop only) */}
-          <div className="hidden lg:flex items-center space-x-2 md:space-x-4">
+          {/* Contact Us and Login/Admin Buttons (desktop only) */}
+          <div className="hidden lg:flex items-center ml-auto space-x-2 md:space-x-4">
             <button
               className="bg-white/10 hover:bg-white/15 text-white font-bold px-3 md:px-6 py-2 rounded-xl border border-white/10 transition-all duration-200 text-sm md:text-base whitespace-nowrap"
               onClick={() => navigate('/jobs')}
@@ -422,14 +431,17 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Hamburger menu button (mobile/tablet) */}
-          <button
-            className="lg:hidden ml-auto p-2 rounded-md hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-primary-500"
-            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            onClick={() => setMobileMenuOpen((v) => !v)}
-          >
-            {mobileMenuOpen ? <X className="h-7 w-7 text-white" /> : <Menu className="h-7 w-7 text-white" />}
-          </button>
+          {/* Invisible right spacer to balance logo (desktop only) */}
+          <div className="absolute right-0 top-0 h-full items-center hidden lg:flex" style={{ visibility: 'hidden' }}>
+            <div className="flex items-center space-x-3 group">
+              <motion.img
+                src={getAssetPath('/assets/tatarilogo.png')}
+                alt="Tatari Systems Logo"
+                className="h-8 w-auto"
+              />
+              <span className="text-lg font-bold">Tatari</span>
+            </div>
+          </div>
         </div>
       </div>
 

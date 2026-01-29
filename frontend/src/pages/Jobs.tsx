@@ -21,25 +21,26 @@ const JOBS: JobPosting[] = [
     id: 'ai-infra-research-intern-spring-2026',
     title: 'AI Infrastructure Research Intern (Spring 2026)',
     summary: 'Data centers + AI-ready systems.',
-    applyUrl: 'https://lnkd.in/eDGxr56d',
+    applyUrl: 'https://form.typeform.com/to/ZrvyOmqx',
   },
   {
     id: 'project-finance-intern-spring-2026',
     title: 'Project Finance Intern (Spring 2026)',
     summary: 'Models, capex/opex, investor materials.',
-    applyUrl: 'https://lnkd.in/eRHs-GZG',
+    applyUrl: 'https://form.typeform.com/to/Y4G6JZjH'
+,
   },
   {
     id: 'product-strategy-intern-spring-2026',
     title: 'Product & Strategy Intern (Spring 2026)',
     summary: 'Market research + GTM deliverables.',
-    applyUrl: 'https://lnkd.in/eYvrcKbK',
+    applyUrl: 'https://form.typeform.com/to/qsQGZSff?typeform-source=lnkd.in',
   },
   {
     id: 'marketing-intern-spring-2026',
     title: 'Marketing Intern (Spring 2026)',
     summary: 'Content, storytelling, distribution.',
-    applyUrl: 'https://lnkd.in/enwWY7bN',
+    applyUrl: 'https://form.typeform.com/to/Tl09hLPM?typeform-source=lnkd.in',
   },
 ]
 
