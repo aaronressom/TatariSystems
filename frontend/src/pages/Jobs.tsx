@@ -90,7 +90,7 @@ const Jobs = () => {
           <motion.div {...fadeInProps} className="mt-14 rounded-2xl border border-white/10 bg-white/5 p-6">
             <div className="text-white font-bold text-lg mb-2">Questions?</div>
             <div className="text-gray-300">
-              If you run into issues with an application link, reach out at <span className="text-white font-semibold">careers@tatarisystems.com</span>.
+              If you run into issues with an application link, reach out at <span className="text-white font-semibold">info@tatari.systems</span>.
             </div>
           </motion.div>
         </div>
