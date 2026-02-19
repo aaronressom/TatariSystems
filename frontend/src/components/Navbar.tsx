@@ -189,56 +189,29 @@ const Navbar = () => {
 
   const learnMoreDropdown = [
     {
-      title: 'Blog',
-      description: 'Insights, news, and updates from Tatari Systems.',
+      title: 'Podcast',
+      description: 'Episodes on AI infrastructure, operations, and product strategy.',
       color: 'bg-brand-blue-1',
-      cta: 'Read Blog',
-      ctaHref: '/blog',
+      cta: 'Listen Now',
+      ctaHref: '/podcast',
       subsections: [
         {
-          label: 'Technical Insights',
-          desc: 'Deep dives into AI infrastructure and best practices.',
+          label: 'Infrastructure Deep Dives',
+          desc: 'Architectures, deployment patterns, and reliability lessons.',
           icon: 'Cpu',
-          href: '/blog#technical',
+          href: '/podcast#infrastructure',
         },
         {
-          label: 'Industry News',
-          desc: 'Latest developments in AI and cloud computing.',
+          label: 'Founder Conversations',
+          desc: 'Interviews with operators, researchers, and technical leaders.',
           icon: 'Globe',
-          href: '/blog#news',
+          href: '/podcast#founders',
         },
         {
-          label: 'Company Updates',
-          desc: 'Product launches, team news, and milestones.',
+          label: 'Build In Public',
+          desc: 'Team updates and behind-the-scenes product decisions.',
           icon: 'BookOpen',
-          href: '/blog#updates',
-        },
-      ],
-    },
-    {
-      title: 'Press Releases',
-      description: 'Official announcements and media coverage.',
-      color: 'bg-brand-blue-1',
-      cta: 'View Press',
-      ctaHref: '/press-releases',
-      subsections: [
-        {
-          label: 'Product Launches',
-          desc: 'New features, products, and platform updates.',
-          icon: 'Zap',
-          href: '/press-releases#launches',
-        },
-        {
-          label: 'Company News',
-          desc: 'Funding, partnerships, and strategic announcements.',
-          icon: 'Globe',
-          href: '/press-releases#news',
-        },
-        {
-          label: 'Media Coverage',
-          desc: 'Press mentions, interviews, and thought leadership.',
-          icon: 'BookOpen',
-          href: '/press-releases#coverage',
+          href: '/podcast#updates',
         },
       ],
     },
@@ -306,7 +279,7 @@ const Navbar = () => {
       label: 'About',
       mainTo: '#',
       content: (
-        <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl">
+        <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl">
           {learnMoreDropdown.map((learn) => (
             <div className="flex flex-col h-full min-w-0" key={learn.title}>
               {/* Main Card */}

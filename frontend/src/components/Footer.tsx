@@ -38,7 +38,7 @@ const Footer = () => {
       links: [
         { name: 'Documentation', path: '/docs', icon: undefined },
         { name: 'Research', path: '/research', icon: undefined },
-        { name: 'Blog', path: '/blog', icon: undefined },
+        { name: 'Podcast', path: '/podcast', icon: undefined },
         { name: 'Support Center', path: '/support', icon: undefined }
       ]
     },
