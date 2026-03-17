@@ -8,10 +8,22 @@ interface PodcastEpisode {
   title: string
   description: string
   audioUrl: string
+  spotifyEmbedUrl?: string
+  externalUrl?: string
   coverImageUrl?: string
   duration?: string
   guest?: string
   publishedAt: string
+}
+
+const firstSpotifyEpisode: PodcastEpisode = {
+  id: 'spotify-2q9g4GWlX4clqM2cgKnCWY',
+  title: 'Tatari Systems Podcast - Episode 1',
+  description: 'Check out our first episode with Kevin Powers.',
+  audioUrl: '',
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/episode/2q9g4GWlX4clqM2cgKnCWY?utm_source=generator',
+  externalUrl: 'https://open.spotify.com/episode/2q9g4GWlX4clqM2cgKnCWY?si=l3Cb9am1QYy0DW0_gF_scg',
+  publishedAt: new Date().toISOString(),
 }
 
 const getApiBaseUrl = () => {
@@ -21,8 +33,8 @@ const getApiBaseUrl = () => {
 }
 
 const Podcast = () => {
-  const [episodes, setEpisodes] = useState<PodcastEpisode[]>([])
-  const [featuredEpisodeId, setFeaturedEpisodeId] = useState<string>('')
+  const [episodes, setEpisodes] = useState<PodcastEpisode[]>([firstSpotifyEpisode])
+  const [featuredEpisodeId, setFeaturedEpisodeId] = useState<string>(firstSpotifyEpisode.id)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showUploadForm, setShowUploadForm] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
@@ -63,21 +75,70 @@ const Podcast = () => {
 
       const data = await response.json()
       const mappedEpisodes: PodcastEpisode[] = (Array.isArray(data) ? data : []).map((episode: any) => ({
-        id: String(episode.id),
+        id: (() => {
+          const mappedSpotifyEmbed = episode.spotifyEmbedUrl || episode.spotify_embed_url || ''
+          const mappedExternalUrl = episode.externalUrl || episode.external_url || ''
+          const mappedTitle = episode.title || ''
+          const isFirstSpotifyEpisode =
+            mappedSpotifyEmbed.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedExternalUrl.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedTitle === firstSpotifyEpisode.title
+
+          return isFirstSpotifyEpisode ? firstSpotifyEpisode.id : String(episode.id)
+        })(),
         title: episode.title || 'Untitled Episode',
-        description: episode.description || 'No episode description provided yet.',
+        description: (() => {
+          const mappedSpotifyEmbed = episode.spotifyEmbedUrl || episode.spotify_embed_url || ''
+          const mappedExternalUrl = episode.externalUrl || episode.external_url || ''
+          const mappedTitle = episode.title || ''
+          const isFirstSpotifyEpisode =
+            mappedSpotifyEmbed.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedExternalUrl.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedTitle === firstSpotifyEpisode.title
+
+          return isFirstSpotifyEpisode
+            ? firstSpotifyEpisode.description
+            : (episode.description || 'No episode description provided yet.')
+        })(),
         audioUrl: episode.audioUrl || episode.audio_url || '',
+        spotifyEmbedUrl: (() => {
+          const mappedSpotifyEmbed = episode.spotifyEmbedUrl || episode.spotify_embed_url || ''
+          const mappedExternalUrl = episode.externalUrl || episode.external_url || ''
+          const mappedTitle = episode.title || ''
+          const isFirstSpotifyEpisode =
+            mappedSpotifyEmbed.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedExternalUrl.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedTitle === firstSpotifyEpisode.title
+
+          return isFirstSpotifyEpisode ? firstSpotifyEpisode.spotifyEmbedUrl : mappedSpotifyEmbed
+        })(),
+        externalUrl: (() => {
+          const mappedSpotifyEmbed = episode.spotifyEmbedUrl || episode.spotify_embed_url || ''
+          const mappedExternalUrl = episode.externalUrl || episode.external_url || ''
+          const mappedTitle = episode.title || ''
+          const isFirstSpotifyEpisode =
+            mappedSpotifyEmbed.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedExternalUrl.includes('2q9g4GWlX4clqM2cgKnCWY') ||
+            mappedTitle === firstSpotifyEpisode.title
+
+          return isFirstSpotifyEpisode ? firstSpotifyEpisode.externalUrl : mappedExternalUrl
+        })(),
         coverImageUrl: episode.coverImageUrl || episode.cover_image_url || '',
         duration: episode.duration || '',
         guest: episode.guest || '',
         publishedAt: episode.publishedAt || episode.published_at || new Date().toISOString(),
-      })).filter((episode) => episode.audioUrl)
+      })).filter((episode) => episode.audioUrl || episode.spotifyEmbedUrl)
 
-      setEpisodes(mappedEpisodes)
-      if (mappedEpisodes[0]) {
-        setFeaturedEpisodeId(mappedEpisodes[0].id)
+      const mergedEpisodes = [
+        firstSpotifyEpisode,
+        ...mappedEpisodes.filter((episode) => episode.id !== firstSpotifyEpisode.id),
+      ]
+
+      setEpisodes(mergedEpisodes)
+      if (mergedEpisodes[0]) {
+        setFeaturedEpisodeId(mergedEpisodes[0].id)
       }
-      setStatusMessage(mappedEpisodes.length === 0 ? 'No episodes published yet.' : '')
+      setStatusMessage(mergedEpisodes.length === 0 ? 'No episodes published yet.' : '')
     } catch (error) {
       console.error('Error loading podcast episodes:', error)
       setStatusMessage('No episodes available yet')
@@ -335,10 +396,35 @@ const Podcast = () => {
 
                   <p className="text-white/80 leading-relaxed mb-5">{featuredEpisode.description}</p>
 
-                  <audio key={featuredEpisode.id} controls preload="metadata" className="w-full">
-                    <source src={featuredEpisode.audioUrl} />
-                    Your browser does not support audio playback.
-                  </audio>
+                  {featuredEpisode.externalUrl && (
+                    <a
+                      href={featuredEpisode.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex mb-4 px-3 py-2 rounded-lg bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
+                    >
+                      Open on Spotify
+                    </a>
+                  )}
+
+                  {featuredEpisode.spotifyEmbedUrl ? (
+                    <iframe
+                      title={`${featuredEpisode.title} Spotify Embed`}
+                      src={featuredEpisode.spotifyEmbedUrl}
+                      width="100%"
+                      height="152"
+                      frameBorder="0"
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      loading="lazy"
+                      style={{ borderRadius: '12px' }}
+                    />
+                  ) : (
+                    <audio key={featuredEpisode.id} controls preload="metadata" className="w-full">
+                      <source src={featuredEpisode.audioUrl} />
+                      Your browser does not support audio playback.
+                    </audio>
+                  )}
                 </>
               ) : (
                 <div className="text-center py-16">

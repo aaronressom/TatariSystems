@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import { getAssetPath } from '../utils/paths'
 
+const papers = [
+  {
+    id: 'us-iran-war-impact',
+    title: 'US-Iran War Impact',
+    fileName: 'US-Iran War Impact.pdf',
+  },
+  {
+    id: 'annual-report-2025',
+    title: 'Tatari Systems Annual Report 2025',
+    fileName: 'Tatari Systems Annual Report 2025-compressed.pdf',
+  },
+]
+
 const Research = () => {
-  const paperPath = getAssetPath('research/Tatari Systems Annual Report 2025-compressed.pdf')
+  const [selectedPaperId, setSelectedPaperId] = useState(papers[0].id)
+
+  const selectedPaper = useMemo(
+    () => papers.find((paper) => paper.id === selectedPaperId) || papers[0],
+    [selectedPaperId],
+  )
+
+  const paperPath = getAssetPath(`research/${selectedPaper.fileName}`)
   const paperUrl = encodeURI(paperPath)
 
   return (
@@ -27,7 +47,7 @@ const Research = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-white/80 text-base md:text-lg max-w-3xl mx-auto text-center mb-8"
           >
-            Explore our latest publications directly on here. You can also open the full reports and publications in a new tab or download it.
+            Explore our latest publications directly on here. Select a paper below to preview, then open in a new tab or download it.
           </motion.p>
 
           <motion.div
@@ -37,9 +57,35 @@ const Research = () => {
             className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm p-3 sm:p-4 lg:p-5 shadow-2xl"
           >
             <div className="flex flex-wrap items-center justify-between gap-3 mb-3 px-1">
-              <h2 className="text-white text-base md:text-lg font-semibold">
-                Tatari Systems Annual Report 2025
-              </h2>
+              <div className="flex items-center gap-3">
+                <h2 className="text-white text-base md:text-lg font-semibold">{selectedPaper.title}</h2>
+                <span className="text-xs text-white/60 bg-white/10 border border-white/10 px-2 py-1 rounded-md">
+                  {papers.length} papers
+                </span>
+              </div>
+
+              <div className="w-full order-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {papers.map((paper) => {
+                    const isActive = paper.id === selectedPaperId
+                    return (
+                      <button
+                        key={paper.id}
+                        type="button"
+                        onClick={() => setSelectedPaperId(paper.id)}
+                        className={`w-full text-left rounded-lg border px-3 py-2 text-sm transition-colors ${
+                          isActive
+                            ? 'border-primary-400 bg-primary-500/15 text-white'
+                            : 'border-white/15 bg-black/40 text-white/80 hover:border-white/30 hover:bg-white/5'
+                        }`}
+                      >
+                        {paper.title}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
               <div className="flex items-center gap-2">
                 <a
                   href={paperUrl}
@@ -61,7 +107,7 @@ const Research = () => {
 
             <div className="relative rounded-xl overflow-hidden border border-white/10 bg-black/40">
               <iframe
-                title="Tatari Systems Annual Report 2025 PDF"
+                title={`${selectedPaper.title} PDF`}
                 src={`${paperUrl}#view=FitH`}
                 className="w-full h-[70vh] min-h-[500px]"
               />

@@ -217,7 +217,7 @@ const Navbar = () => {
     },
     {
       title: 'Research',
-      description: 'Research updates and case studies (coming soon).',
+      description: 'Research updates and case studies.',
       color: 'bg-brand-blue-1',
       cta: 'Explore Research',
       ctaHref: '/research',
@@ -276,14 +276,14 @@ const Navbar = () => {
       ),
     },
     {
-      label: 'About',
+      label: 'Institute',
       mainTo: '#',
       content: (
         <div className="max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 gap-4 p-6 bg-black/85 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl">
           {learnMoreDropdown.map((learn) => (
             <div className="flex flex-col h-full min-w-0" key={learn.title}>
               {/* Main Card */}
-              <div className={`rounded-xl p-4 mb-3 ${learn.color} flex flex-col justify-between min-w-0`}>
+              <div className={`rounded-xl p-4 mb-3 ${learn.color} flex flex-col justify-between min-w-0 h-full`}>
                 <div>
                   <div className="text-white font-bold text-base mb-1">{learn.title}</div>
                   <div className="text-white/80 mb-3 text-sm">{learn.description}</div>
@@ -460,7 +460,7 @@ const Navbar = () => {
                         {item.title}
                       </button>
                     ))}
-                    {dropdown.label === 'About' && learnMoreDropdown.map((item) => (
+                    {dropdown.label === 'Institute' && learnMoreDropdown.map((item) => (
                       <button
                         key={item.title}
                         className="text-white/80 hover:text-primary-500 text-left py-2 pl-4"
