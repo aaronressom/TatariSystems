@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import React, { Suspense } from 'react'
-const Home = React.lazy(() => import('./pages/Home'))
+import Home from './pages/Home'
 const About = React.lazy(() => import('./pages/About'))
 const AIPlatform = React.lazy(() => import('./pages/AIPlatform'))
 const Contact = React.lazy(() => import('./pages/Contact'))
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <AnimatePresence mode="wait">
-      <Suspense fallback={<div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',background:'#000',color:'#fff',fontSize:24}}>Loading...</div>}>
+      <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ai-platform" element={<AIPlatform />} />
