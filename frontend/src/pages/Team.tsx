@@ -47,11 +47,11 @@ const extendedLeadership = [
     bio: '/team/nathan-banketa'
   },
   { 
-    name: 'Jimi Oso', 
-    role: 'Chief Engineering Officer', 
-    img: 'oso.jpg',
-    linkedin: 'https://linkedin.com/in/jimi-oso',
-    bio: '/team/jimi-oso'
+    name: 'Aarash Iqbal', 
+    role: 'Chief Product Officer', 
+    img: 'iqbal.png',
+    linkedin: 'https://linkedin.com/in/aarashiqbal',
+    bio: '/team/aarash-iqbal'
   }
 ]
 

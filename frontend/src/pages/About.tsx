@@ -13,7 +13,7 @@ const team = [
   { name: 'Meba Michael', role: 'Chief Financial Officer, Co-Founder', img: 'michael.jpg' },
   { name: 'Glodi Karagi', role: 'Chief of Business Development', img: 'karagi.jpg' },
   { name: 'Nathan Banketa', role: 'Chief Research Officer', img: 'banketa.jpg' },
-  { name: 'Jimi Oso', role: 'Chief Engineering Officer', img: 'oso.jpg' },
+  { name: 'Aarash Iqbal', role: 'Chief Product Officer', img: 'iqbal.png' },
 ]
 
 const teamTopRow = team.slice(0, 4)
@@ -58,36 +58,6 @@ const About = () => {
               <p style={{ margin: 0, fontSize: 14, color: storyActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', lineHeight: 1.8, maxWidth: 760, transition: 'color 0.4s ease-in-out' }}>
                 Tatari was founded on a simple observation: the world's cheapest and most abundant renewable energy is concentrated in places with the least compute infrastructure. We started in Ethiopia — not because it was easy, but because it was right. Our first operation runs on hydroelectric power at a fraction of what data centers pay in the United States. That cost advantage is the thesis. Bitcoin mining is how we prove it. Compute infrastructure is where it leads.
               </p>
-            </div>
-          </motion.section>
-
-          {/* Our Values */}
-          <motion.section
-            ref={valuesRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: valuesVisible ? 1 : 0, y: valuesVisible ? 0 : 30 }}
-            transition={{ duration: 0.3, delay: 0.05 }}
-            style={{ marginBottom: 52 }}
-          >
-            <div ref={valuesActiveRef}>
-              <SectionLabel number="02" title="Our Values" active={valuesActive} />
-              <ul style={{ marginTop: 16, display: 'grid', gap: 10, maxWidth: 860, padding: 0, listStyle: 'none' }}>
-                <li>
-                  <span style={{ fontWeight: 500, color: valuesActive ? '#fff' : 'var(--inst-text-60)', transition: 'color 0.4s ease-in-out' }}>Sovereignty:</span>
-                  {' '}
-                  <span style={{ color: valuesActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', transition: 'color 0.4s ease-in-out' }}>We build in markets that need infrastructure on their own terms — not dependent on hyperscalers or foreign platforms.</span>
-                </li>
-                <li>
-                  <span style={{ fontWeight: 500, color: valuesActive ? '#fff' : 'var(--inst-text-60)', transition: 'color 0.4s ease-in-out' }}>Transparency:</span>
-                  {' '}
-                  <span style={{ color: valuesActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', transition: 'color 0.4s ease-in-out' }}>We say what we're doing and what we're not yet doing. Our roadmap is honest about where we are.</span>
-                </li>
-                <li>
-                  <span style={{ fontWeight: 500, color: valuesActive ? '#fff' : 'var(--inst-text-60)', transition: 'color 0.4s ease-in-out' }}>Energy First:</span>
-                  {' '}
-                  <span style={{ color: valuesActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', transition: 'color 0.4s ease-in-out' }}>Every location decision starts with power cost. Cheap, clean energy is the foundation everything else is built on.</span>
-                </li>
-              </ul>
             </div>
           </motion.section>
 
@@ -187,6 +157,36 @@ const About = () => {
                   <div style={{ color: 'var(--inst-text-35)', fontSize: 13 }}>{member.role}</div>
                 </motion.div>
               ))}
+            </div>
+          </motion.section>
+
+          {/* Our Values */}
+          <motion.section
+            ref={valuesRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: valuesVisible ? 1 : 0, y: valuesVisible ? 0 : 30 }}
+            transition={{ duration: 0.3, delay: 0.05 }}
+            style={{ marginBottom: 52 }}
+          >
+            <div ref={valuesActiveRef}>
+              <SectionLabel number="02" title="Our Values" active={valuesActive} />
+              <ul style={{ marginTop: 16, display: 'grid', gap: 10, maxWidth: 860, padding: 0, listStyle: 'none' }}>
+                <li>
+                  <span style={{ fontWeight: 500, color: valuesActive ? '#fff' : 'var(--inst-text-60)', transition: 'color 0.4s ease-in-out' }}>Sovereignty:</span>
+                  {' '}
+                  <span style={{ color: valuesActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', transition: 'color 0.4s ease-in-out' }}>We build in markets that need infrastructure on their own terms — not dependent on hyperscalers or foreign platforms.</span>
+                </li>
+                <li>
+                  <span style={{ fontWeight: 500, color: valuesActive ? '#fff' : 'var(--inst-text-60)', transition: 'color 0.4s ease-in-out' }}>Transparency:</span>
+                  {' '}
+                  <span style={{ color: valuesActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', transition: 'color 0.4s ease-in-out' }}>We say what we're doing and what we're not yet doing. Our roadmap is honest about where we are.</span>
+                </li>
+                <li>
+                  <span style={{ fontWeight: 500, color: valuesActive ? '#fff' : 'var(--inst-text-60)', transition: 'color 0.4s ease-in-out' }}>Energy First:</span>
+                  {' '}
+                  <span style={{ color: valuesActive ? 'var(--inst-text-70)' : 'var(--inst-text-45)', transition: 'color 0.4s ease-in-out' }}>Every location decision starts with power cost. Cheap, clean energy is the foundation everything else is built on.</span>
+                </li>
+              </ul>
             </div>
           </motion.section>
 
