@@ -22,13 +22,39 @@ interface PodcastEpisode {
 
 const firstSpotifyEpisode: PodcastEpisode = {
   id: 'spotify-2q9g4GWlX4clqM2cgKnCWY',
-  title: 'Tatari Systems Podcast - Episode 1',
+  title: 'Episode 1',
   description: 'Check out our first episode with Kevin Powers.',
   audioUrl: '',
   spotifyEmbedUrl: 'https://open.spotify.com/embed/episode/2q9g4GWlX4clqM2cgKnCWY?utm_source=generator',
   externalUrl: 'https://open.spotify.com/episode/2q9g4GWlX4clqM2cgKnCWY?si=l3Cb9am1QYy0DW0_gF_scg',
   publishedAt: new Date().toISOString(),
 }
+
+const secondSpotifyEpisode: PodcastEpisode = {
+  id: 'spotify-3BLtDsxCvPMTUIWaiywwyy',
+  title: 'Episode 2',
+  description: 'Check out our second episode with Lawrence Lessig .',
+  audioUrl: '',
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/episode/3BLtDsxCvPMTUIWaiywwyy?utm_source=generator',
+  externalUrl: 'https://open.spotify.com/episode/3BLtDsxCvPMTUIWaiywwyy',
+  publishedAt: new Date().toISOString(),
+}
+
+const thirdSpotifyEpisode: PodcastEpisode = {
+  id: 'spotify-258oApUxjls6TtrSyeCZdv',
+  title: 'Episode 3',
+  description: 'Check out episode 3 with Philip Larrey.',
+  audioUrl: '',
+  spotifyEmbedUrl: 'https://open.spotify.com/embed/episode/258oApUxjls6TtrSyeCZdv?utm_source=generator',
+  externalUrl: 'https://open.spotify.com/episode/258oApUxjls6TtrSyeCZdv',
+  publishedAt: new Date().toISOString(),
+}
+
+const staticSpotifyEpisodes: PodcastEpisode[] = [
+  thirdSpotifyEpisode,
+  secondSpotifyEpisode,
+  firstSpotifyEpisode,
+]
 
 const getApiBaseUrl = () => {
   return process.env.NODE_ENV === 'development'
@@ -40,8 +66,8 @@ const Podcast = () => {
   const [heroActiveRef, heroActive] = useInView<HTMLDivElement>(0.45, false, '-20% 0px -45% 0px')
   const [contentActiveRef, contentActive] = useInView<HTMLDivElement>(0.45, false, '-20% 0px -45% 0px')
 
-  const [episodes, setEpisodes] = useState<PodcastEpisode[]>([firstSpotifyEpisode])
-  const [featuredEpisodeId, setFeaturedEpisodeId] = useState<string>(firstSpotifyEpisode.id)
+  const [episodes, setEpisodes] = useState<PodcastEpisode[]>(staticSpotifyEpisodes)
+  const [featuredEpisodeId, setFeaturedEpisodeId] = useState<string>(staticSpotifyEpisodes[0].id)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showUploadForm, setShowUploadForm] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
@@ -136,9 +162,24 @@ const Podcast = () => {
         publishedAt: episode.publishedAt || episode.published_at || new Date().toISOString(),
       })).filter((episode) => episode.audioUrl || episode.spotifyEmbedUrl)
 
+      const staticSpotifyIds = new Set(staticSpotifyEpisodes.map((episode) => episode.id))
+      const staticSpotifyEpisodeKeys = [
+        '2q9g4GWlX4clqM2cgKnCWY',
+        '3BLtDsxCvPMTUIWaiywwyy',
+        '258oApUxjls6TtrSyeCZdv',
+      ]
+
       const mergedEpisodes = [
-        firstSpotifyEpisode,
-        ...mappedEpisodes.filter((episode) => episode.id !== firstSpotifyEpisode.id),
+        ...staticSpotifyEpisodes,
+        ...mappedEpisodes.filter((episode) => {
+          if (staticSpotifyIds.has(episode.id)) {
+            return false
+          }
+
+          const embed = episode.spotifyEmbedUrl || ''
+          const external = episode.externalUrl || ''
+          return !staticSpotifyEpisodeKeys.some((key) => embed.includes(key) || external.includes(key))
+        }),
       ]
 
       setEpisodes(mergedEpisodes)

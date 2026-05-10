@@ -1196,11 +1196,8 @@ a {
   transform: rotateY(180deg);
 }
 
-/* Hover brighten for institute subheading/body text tokens */
+/* Institute text tokens: highlight is now driven by scroll position
+   (via the `active` flag on each section), not hover. */
 [style*='var(--inst-text-'] {
   transition: color 0.25s ease-in-out;
-}
-
-[style*='var(--inst-text-']:hover {
-  color: #FFFFFF !important;
 }

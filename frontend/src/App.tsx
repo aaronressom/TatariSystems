@@ -18,6 +18,16 @@ const Research = React.lazy(() => import('./pages/Research'))
 const ExploreOurTech = React.lazy(() => import('./pages/OmniStack'))
 const Login = React.lazy(() => import('./pages/Login'))
 
+const RouteFallback = () => (
+  <div
+    style={{
+      minHeight: '100vh',
+      width: '100%',
+      background: 'var(--inst-bg, #000)',
+    }}
+  />
+)
+
 // Custom hook to scroll to top on route change
 const useScrollToTop = () => {
   const location = useLocation()
@@ -32,7 +42,7 @@ function App() {
 
   return (
     <AnimatePresence mode="wait">
-      <Suspense fallback={null}>
+      <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/ai-platform" element={<AIPlatform />} />

@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface SectionLabelProps {
-  /** Two-digit section number, e.g. "01" */
-  number: string
+  /** Deprecated: numeric prefix is no longer rendered. Kept for backward compatibility. */
+  number?: string
   /** Section title displayed in uppercase */
   title: string
   /** Optional extra className on the wrapper */
@@ -12,11 +12,10 @@ interface SectionLabelProps {
 }
 
 /**
- * "01 —— SECTION NAME" header pattern from the Tatari Institute reference.
- * Renders a monospace number, a decorative line, and an uppercase label.
+ * Uppercase section label header. Previously rendered "01 —— SECTION NAME"
+ * but the numeric prefix has been removed per design update.
  */
 const SectionLabel: React.FC<SectionLabelProps> = ({
-  number,
   title,
   className = '',
   active = false,
@@ -30,31 +29,6 @@ const SectionLabel: React.FC<SectionLabelProps> = ({
         gap: 16,
       }}
     >
-      <span
-        style={{
-          fontFamily: "var(--inst-font-mono, 'SF Mono', monospace)",
-          fontSize: 11,
-          color: active
-            ? 'var(--inst-text-55, rgba(255,255,255,0.55))'
-            : 'var(--inst-text-25, rgba(255,255,255,0.25))',
-          letterSpacing: '0.04em',
-          transition: 'color 0.4s ease-in-out',
-        }}
-      >
-        {number}
-      </span>
-
-      <div
-        style={{
-          height: 1,
-          width: 40,
-          background: active
-            ? 'var(--inst-border-15, rgba(255,255,255,0.15))'
-            : 'var(--inst-border-8, rgba(255,255,255,0.08))',
-          transition: 'background 0.4s ease-in-out',
-        }}
-      />
-
       <h2
         style={{
           fontFamily: "var(--inst-font-sans, 'Inter', sans-serif)",

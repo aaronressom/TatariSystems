@@ -554,6 +554,29 @@ const Institute: React.FC = () => {
               Institutional-grade analysis on sovereign AI systems, compute geopolitics,
               and digital infrastructure economics.
             </p>
+            <a
+              href="https://tatari.institute"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 18,
+                padding: '10px 18px',
+                borderRadius: 8,
+                border: '1px solid var(--inst-border-15)',
+                background: 'var(--inst-surface-8)',
+                color: '#fff',
+                fontFamily: 'var(--inst-font-sans)',
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'all 0.25s ease',
+              }}
+            >
+              View the Institute
+            </a>
           </div>
 
           <div style={{ flex: '1 1 500px', height: 'min(65vh, 560px)', position: 'relative' }}>
