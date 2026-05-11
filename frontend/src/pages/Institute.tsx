@@ -138,13 +138,182 @@ const latLngToVec3 = (lat: number, lng: number, radius: number) => {
 }
 
 const CONTINENT_OUTLINES: Record<string, Array<[number, number]>> = {
-  africa: [[37,10],[36,5],[35,0],[37,-5],[37,-10],[34,-12],[31,-10],[28,-14],[25,-17],[22,-17],[18,-16],[15,-17],[12,-16],[10,-15],[7,-12],[5,-10],[4,-5],[4,-1],[5,1],[4,5],[4,10],[2,10],[0,10],[-2,10],[-5,12],[-8,13],[-10,14],[-13,13],[-15,12],[-18,12],[-20,15],[-23,15],[-25,15],[-27,16],[-28,17],[-30,18],[-32,18],[-34,18],[-34,20],[-34,22],[-33,25],[-33,27],[-31,29],[-30,30],[-28,31],[-25,33],[-22,35],[-20,35],[-17,38],[-15,40],[-12,40],[-10,40],[-7,42],[-5,40],[-2,42],[0,42],[3,40],[5,40],[8,42],[10,42],[12,44],[13,45],[15,45],[18,43],[20,40],[23,38],[25,38],[28,35],[30,33],[32,30],[33,28],[35,28],[36,20],[37,15],[37,10]],
-  europe: [[36,-10],[37,-8],[38,-8],[40,-9],[43,-9],[43,-5],[44,0],[46,-2],[48,-5],[50,-5],[52,-5],[53,-3],[55,-3],[56,-5],[58,-5],[60,0],[62,5],[64,10],[65,14],[67,16],[70,20],[70,24],[70,28],[68,28],[65,25],[62,28],[60,30],[58,26],[57,24],[55,20],[54,16],[54,14],[53,10],[51,8],[50,5],[48,4],[46,3],[45,5],[44,8],[43,6],[42,3],[41,2],[40,0],[39,0],[38,-1],[37,0],[36,-5],[36,-10]],
-  asia: [[42,28],[44,35],[45,40],[43,42],[42,44],[40,48],[40,50],[42,55],[45,60],[48,58],[50,55],[53,58],[55,60],[58,63],[60,65],[63,68],[65,70],[68,70],[70,72],[72,80],[71,85],[70,90],[69,95],[68,100],[66,103],[65,105],[62,108],[60,110],[57,110],[55,110],[52,115],[50,120],[48,125],[45,130],[43,132],[40,135],[38,140],[36,137],[35,136],[33,132],[30,125],[28,120],[25,117],[22,114],[20,110],[18,108],[15,108],[12,107],[10,106],[8,100],[6,102],[5,103],[3,104],[1,104],[-4,105],[-8,107],[-8,112],[-8,115],[-6,118],[-5,120],[-2,125],[0,128],[3,127],[5,127],[8,122],[10,120],[15,120],[18,120],[22,120],[25,121],[28,122],[30,128],[32,130],[35,132],[36,135],[35,136],[38,140],[40,142],[42,145],[44,143],[46,142],[48,140],[50,140],[52,140],[55,137],[58,139],[60,140],[62,150],[65,170],[68,180],[70,170],[72,155],[72,140],[71,135],[68,120],[65,100],[62,92],[60,90],[57,80],[55,72],[52,62],[50,55],[47,45],[45,40],[42,28]],
-  north_america: [[70,-165],[72,-155],[71,-140],[69,-137],[68,-135],[64,-140],[60,-140],[58,-135],[56,-132],[55,-130],[52,-125],[50,-125],[48,-125],[45,-124],[42,-124],[38,-122],[35,-120],[32,-118],[30,-115],[28,-112],[25,-110],[22,-107],[20,-105],[18,-100],[18,-95],[18,-92],[18,-88],[19,-87],[20,-87],[22,-87],[24,-82],[25,-80],[27,-80],[28,-80],[30,-82],[30,-85],[30,-88],[30,-90],[32,-90],[35,-90],[36,-85],[38,-76],[40,-74],[42,-72],[42,-70],[44,-67],[46,-67],[47,-67],[48,-65],[49,-62],[50,-60],[52,-58],[55,-60],[58,-62],[60,-65],[63,-65],[65,-65],[68,-58],[70,-55],[73,-58],[75,-60],[78,-65],[80,-70],[83,-70],[83,-80],[83,-95],[78,-95],[75,-95],[72,-120],[72,-130],[71,-150],[70,-165]],
-  south_america: [[12,-72],[11,-74],[10,-75],[9,-76],[8,-77],[6,-77],[5,-77],[3,-79],[2,-80],[0,-80],[-2,-80],[-5,-80],[-8,-79],[-10,-77],[-12,-76],[-15,-75],[-18,-72],[-20,-70],[-22,-70],[-25,-70],[-28,-71],[-30,-72],[-32,-72],[-35,-72],[-38,-73],[-40,-72],[-43,-74],[-45,-75],[-48,-75],[-50,-75],[-53,-72],[-55,-68],[-55,-66],[-55,-65],[-53,-62],[-52,-60],[-50,-62],[-48,-65],[-45,-66],[-42,-65],[-40,-62],[-38,-58],[-36,-56],[-35,-55],[-32,-52],[-30,-50],[-28,-49],[-25,-48],[-23,-42],[-22,-40],[-18,-39],[-15,-39],[-12,-38],[-10,-37],[-7,-35],[-5,-35],[-3,-40],[-2,-45],[0,-50],[1,-51],[2,-52],[4,-55],[5,-60],[7,-60],[8,-62],[10,-68],[10,-72],[12,-72]],
-  oceania: [[-10,142],[-11,143],[-12,143],[-14,144],[-15,145],[-18,147],[-20,149],[-23,151],[-25,153],[-27,153],[-28,153],[-30,153],[-33,152],[-35,151],[-37,150],[-38,148],[-38,146],[-37,142],[-37,140],[-36,138],[-35,137],[-34,135],[-33,134],[-32,131],[-32,130],[-28,120],[-25,114],[-22,114],[-20,116],[-20,119],[-19,121],[-18,122],[-16,126],[-15,129],[-14,133],[-14,136],[-12,140],[-12,142],[-10,142]],
-  middle_east: [[30,32],[32,34],[33,36],[35,36],[37,40],[38,42],[39,44],[40,44],[40,48],[38,48],[36,50],[34,51],[32,52],[30,50],[28,50],[26,50],[25,55],[24,56],[23,57],[22,55],[20,55],[18,53],[16,50],[15,48],[13,45],[12,44],[15,42],[18,40],[20,38],[22,36],[24,34],[26,33],[28,33],[30,32]],
+  africa: [
+    // NW coast – Morocco → Algeria → Tunisia
+    [35,-5],[35,0],[33,8],[32,12],
+    // Libya → Egypt north coast
+    [32,20],[32,25],[31,32],
+    // Red Sea / NE Africa
+    [30,32],[28,34],[25,37],[22,38],[18,40],[15,42],
+    // Horn of Africa (crucial – goes east to Cape Guardafui)
+    [12,44],[11,48],[11,51],[10,51],
+    // Somali coast going SW
+    [8,48],[5,41],[2,45],[0,42],
+    // East Africa coast going south
+    [-4,40],[-10,40],[-15,36],[-20,35],[-25,34],
+    [-28,33],[-30,31],
+    // Cape of Good Hope / South Africa
+    [-34,26],[-34,22],[-34,18],
+    // West coast going north
+    [-32,18],[-28,16],[-25,15],[-20,13],[-15,12],
+    [-10,14],[-5,10],[0,8],[5,1],
+    // West Africa bulge
+    [5,-5],[7,-12],[10,-15],[12,-16],[15,-17],
+    [18,-16],[22,-17],[25,-15],[28,-14],[31,-10],[33,-5],[35,-5],
+  ],
+  europe: [
+    // Portugal SW corner
+    [37,-9],[36,-9],[36,-7],
+    // Spain south – Gibraltar
+    [36,-5],[36,-2],
+    // South France / Italian Riviera direction
+    [38,0],[43,3],[44,7],
+    // North France → Channel coast
+    [48,0],[50,-2],[51,-2],[52,-2],
+    // North Sea → Scotland
+    [54,-1],[56,-3],[58,-5],
+    // Norway coast going north
+    [60,0],[62,5],[64,10],[66,14],[68,16],[70,22],[71,26],
+    // Kola Peninsula / Finland
+    [70,30],[68,32],[65,30],[62,30],[60,28],
+    // Baltic coast (simplified)
+    [57,22],[55,20],[54,16],[54,14],[55,10],[54,8],[53,8],
+    // Netherlands / Belgium back to France
+    [52,5],[51,4],[50,2],
+    // Northern Spain coast
+    [44,-2],[43,-8],[42,-9],[40,-9],[38,-9],[37,-9],
+  ],
+  asia: [
+    // Western Turkey / Bosphorus
+    [41,26],[42,30],[42,36],[42,42],
+    // Caucasus / Caspian
+    [40,48],[44,52],
+    // Kazakhstan → Siberia
+    [50,60],[55,68],[60,68],
+    // Northern Siberia coast (simplified)
+    [65,80],[68,100],[70,120],[70,140],
+    // Russian Far East
+    [65,160],[60,163],[56,163],
+    // Descend toward Korea
+    [52,142],[48,140],
+    // Korean Peninsula / Manchuria
+    [44,132],[40,128],[38,122],
+    // East China coast
+    [32,122],[28,122],[24,118],[22,114],[20,110],
+    // Vietnam coast
+    [16,108],[12,108],[10,104],
+    // Malay Peninsula going south
+    [6,102],[4,100],[2,104],[1,104],
+    // Turn – up Bay of Bengal west side
+    [5,100],[8,98],[16,97],
+    // Bangladesh
+    [22,90],[20,88],
+    // India east coast going south
+    [18,84],[15,80],[12,80],[9,80],[8,77],
+    // India southern tip (Kanyakumari – key recognition feature)
+    [6,77],
+    // India west coast going north
+    [8,76],[12,75],[14,75],[18,72],[20,72],
+    // Gujarat / Pakistan coast
+    [22,68],[24,68],[26,62],[25,58],
+    // Iran south coast (Makran)
+    [25,56],[26,54],
+    // Persian Gulf north → back to Turkey
+    [28,50],[30,48],[32,46],[38,44],[40,42],[42,36],[41,26],
+  ],
+  north_america: [
+    // Alaska south coast
+    [60,-140],[56,-133],[55,-130],
+    // Pacific coast going south
+    [52,-128],[50,-125],[48,-124],[45,-124],
+    [42,-124],[38,-122],[35,-120],[32,-118],
+    // Baja / Mexico Pacific
+    [28,-112],[24,-110],[20,-105],
+    // Mexico Gulf coast
+    [18,-96],[18,-88],[18,-87],
+    // Yucatan tip
+    [20,-87],[22,-87],[24,-82],
+    // Florida
+    [25,-80],[27,-80],[28,-80],[30,-82],
+    // US Gulf coast
+    [29,-90],[30,-90],[30,-88],
+    // US East coast going north
+    [32,-80],[34,-78],[36,-76],[38,-75],
+    [40,-74],[42,-72],[42,-70],[44,-67],
+    // Maritime Canada
+    [46,-67],[48,-65],[50,-60],[52,-58],
+    [55,-60],[58,-62],[60,-65],[63,-65],[65,-65],
+    // Labrador / Arctic coast
+    [68,-58],[70,-55],[73,-60],[75,-65],
+    [78,-75],[80,-80],[83,-85],[83,-95],
+    // Arctic going west
+    [78,-100],[72,-120],[70,-135],[68,-160],
+    [65,-168],[62,-168],
+    // Back to Alaska
+    [60,-152],[60,-140],
+  ],
+  south_america: [
+    // Venezuela / Colombia
+    [12,-72],[10,-75],[8,-77],[6,-77],[4,-73],
+    // Colombia → Ecuador coast
+    [2,-77],[0,-80],
+    // Peru coast
+    [-5,-80],[-10,-77],[-15,-75],[-18,-72],
+    // Chile coast going south
+    [-20,-70],[-25,-70],[-28,-71],[-30,-72],
+    [-35,-72],[-38,-73],[-40,-72],
+    [-43,-74],[-48,-75],[-53,-72],
+    // Tierra del Fuego
+    [-55,-68],[-55,-65],[-55,-63],
+    // Patagonia east coast going north
+    [-50,-65],[-45,-65],[-42,-63],
+    [-40,-62],[-38,-58],[-35,-56],
+    [-32,-52],[-30,-50],[-25,-48],
+    // Brazil coast
+    [-23,-43],[-22,-40],[-18,-39],
+    [-15,-39],[-12,-38],[-7,-35],[-5,-35],
+    // NE Brazil
+    [-3,-41],[0,-50],
+    // Guyana coast back to start
+    [2,-50],[4,-52],[6,-57],
+    [8,-60],[10,-62],[10,-65],[12,-72],
+  ],
+  oceania: [
+    // Cape York NE
+    [-10,142],[-12,143],[-14,144],
+    // East coast going south
+    [-16,146],[-18,147],[-20,149],
+    [-22,150],[-24,152],[-26,153],[-28,153],
+    [-30,153],[-32,152],
+    // Sydney area → SE corner
+    [-34,151],[-35,150],[-37,150],
+    [-38,147],[-38,146],[-38,144],
+    // South coast
+    [-37,142],[-36,140],[-35,138],[-35,136],
+    [-34,135],[-33,134],[-32,131],[-32,128],
+    // SW corner
+    [-31,120],[-28,115],[-25,114],[-22,114],
+    // NW coast going north
+    [-20,116],[-20,118],[-18,122],
+    [-16,124],[-15,129],[-14,133],
+    [-14,136],[-12,140],[-12,142],[-10,142],
+  ],
+  middle_east: [
+    // Jordan / Levant coast
+    [30,32],[32,34],[33,36],[35,36],
+    // Turkey border
+    [37,40],[38,42],[40,46],
+    // Caspian south coast
+    [40,48],[38,48],[36,50],
+    // Iran Persian coast
+    [34,52],[32,52],[30,50],[28,50],
+    // Oman coast
+    [26,58],[22,59],[20,58],[16,50],[15,48],
+    // Yemen south
+    [13,46],[12,44],[15,42],
+    // Saudi west coast going north
+    [18,38],[20,37],[22,36],[24,34],[26,33],[28,33],[30,32],
+  ],
 }
 
 const InteractiveGlobe: React.FC<{
@@ -153,7 +322,24 @@ const InteractiveGlobe: React.FC<{
 }> = ({ activeContinent, onContinentClick }) => {
   const mountRef = useRef<HTMLDivElement | null>(null)
   const frameRef = useRef<number | null>(null)
+  const groupRef = useRef<THREE.Group | null>(null)
 
+  // Mutable animation state as refs so they persist across renders
+  const targetRef = useRef({ x: 0.2, y: 0 })
+  const velRef = useRef({ x: 0, y: 0 })
+  const isDraggingRef = useRef(false)
+  const dragStartRef = useRef({ x: 0, y: 0 })
+  const activeContinentRef = useRef<string | null>(null)
+
+  // Refs to live-update materials without tearing down the scene
+  const outlineMatRef = useRef<Record<string, {
+    glow: THREE.LineBasicMaterial
+    main: THREE.LineBasicMaterial
+    core: THREE.LineBasicMaterial
+  }>>({})
+  const hotspotMeshRef = useRef<Record<string, { outer: THREE.Mesh; core: THREE.Mesh }>>({})
+
+  // Effect 1 – build the Three.js scene ONCE
   useEffect(() => {
     const container = mountRef.current
     if (!container) return
@@ -172,121 +358,84 @@ const InteractiveGlobe: React.FC<{
     container.appendChild(renderer.domElement)
 
     const group = new THREE.Group()
+    groupRef.current = group
     scene.add(group)
 
+    // Base wireframe sphere
     group.add(
       new THREE.Mesh(
         new THREE.SphereGeometry(1, 64, 64),
-        new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.018,
-        }),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.018 }),
       ),
     )
 
+    // Latitude grid lines
     for (let lat = -60; lat <= 60; lat += 30) {
       const c = new THREE.EllipseCurve(
-        0,
-        0,
+        0, 0,
         Math.cos((lat * Math.PI) / 180),
         Math.cos((lat * Math.PI) / 180),
-        0,
-        2 * Math.PI,
-        false,
-        0,
+        0, 2 * Math.PI, false, 0,
       )
-      const points = c
-        .getPoints(100)
-        .map((p) => new THREE.Vector3(p.x, Math.sin((lat * Math.PI) / 180), p.y))
-      group.add(
-        new THREE.Line(
-          new THREE.BufferGeometry().setFromPoints(points),
-          new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.025 }),
-        ),
-      )
+      const pts = c.getPoints(100).map((p) => new THREE.Vector3(p.x, Math.sin((lat * Math.PI) / 180), p.y))
+      group.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.025 }),
+      ))
     }
 
+    // Continent outlines – store materials in ref for live updates
+    outlineMatRef.current = {}
     Object.entries(CONTINENT_OUTLINES).forEach(([key, coords]) => {
-      const isActive =
-        activeContinent === key ||
-        (key === 'oceania' && activeContinent === 'asia_pacific') ||
-        (key === 'asia' && activeContinent === 'asia_pacific') ||
-        (key === 'middle_east' && activeContinent === 'middle_east')
-
       const smoothed: Array<[number, number]> = []
       for (let i = 0; i < coords.length; i++) {
         const [lat1, lng1] = coords[i]
         const [lat2, lng2] = coords[(i + 1) % coords.length]
-        const steps = 4
-        for (let s = 0; s < steps; s++) {
-          const t = s / steps
+        for (let s = 0; s < 4; s++) {
+          const t = s / 4
           smoothed.push([lat1 + (lat2 - lat1) * t, lng1 + (lng2 - lng1) * t])
         }
       }
       smoothed.push(smoothed[0])
 
-      const points = smoothed.map(([lat, lng]) => latLngToVec3(lat, lng, 1.003))
-      const geo = new THREE.BufferGeometry().setFromPoints(points)
+      const glowMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.06 })
+      group.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(smoothed.map(([a, b]) => latLngToVec3(a, b, 1.001))),
+        glowMat,
+      ))
 
-      const glowMat = new THREE.LineBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: isActive ? 0.2 : 0.06,
-      })
-      const glowPoints = smoothed.map(([lat, lng]) => latLngToVec3(lat, lng, 1.001))
-      glowPoints.push(glowPoints[0])
-      group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(glowPoints), glowMat))
+      const mainMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 })
+      group.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(smoothed.map(([a, b]) => latLngToVec3(a, b, 1.003))),
+        mainMat,
+      ))
 
-      const mainMat = new THREE.LineBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: isActive ? 0.85 : 0.4,
-      })
-      group.add(new THREE.Line(geo.clone(), mainMat))
+      const coreMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 })
+      group.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(smoothed.map(([a, b]) => latLngToVec3(a, b, 1.005))),
+        coreMat,
+      ))
 
-      const corePoints = smoothed.map(([lat, lng]) => latLngToVec3(lat, lng, 1.005))
-      corePoints.push(corePoints[0])
-      const coreMat = new THREE.LineBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: isActive ? 0.6 : 0.25,
-      })
-      group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(corePoints), coreMat))
-
-      if (isActive && smoothed.length > 3) {
-        const fillPoints = smoothed.map(([lat, lng]) => latLngToVec3(lat, lng, 1.002))
-        const fillGeo = new THREE.BufferGeometry().setFromPoints(fillPoints)
-        const fillMat = new THREE.PointsMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: 0.08,
-          size: 0.008,
-        })
-        group.add(new THREE.Points(fillGeo, fillMat))
-      }
+      outlineMatRef.current[key] = { glow: glowMat, main: mainMat, core: coreMat }
     })
 
+    // Data-center marker dots
     DC_POINTS.forEach(([lat, lng, intensity]) => {
       const pos = latLngToVec3(lat, lng, 1.005)
       const dot = new THREE.Mesh(
         new THREE.SphereGeometry(0.006 + intensity * 0.008, 10, 10),
-        new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: 0.3 + intensity * 0.4,
-        }),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 + intensity * 0.4 }),
       )
       dot.position.copy(pos)
       group.add(dot)
     })
 
-    const hotspotMeshes: Array<{ outer: THREE.Mesh; core: THREE.Mesh }> = []
+    // Continent hotspot markers
+    hotspotMeshRef.current = {}
+    const hotspotPulseList: Array<{ outer: THREE.Mesh; core: THREE.Mesh; key: string }> = []
 
     Object.entries(CONTINENTS).forEach(([key, c]) => {
       const pos = latLngToVec3(c.lat, c.lng, 1.04)
-      const isActive = activeContinent === key
 
       const hitTarget = new THREE.Mesh(
         new THREE.SphereGeometry(0.08, 14, 14),
@@ -298,12 +447,7 @@ const InteractiveGlobe: React.FC<{
 
       const ring = new THREE.Mesh(
         new THREE.RingGeometry(0.055, 0.075, 48),
-        new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: isActive ? 0.7 : 0.25,
-          side: THREE.DoubleSide,
-        }),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25, side: THREE.DoubleSide }),
       )
       ring.position.copy(pos)
       ring.lookAt(0, 0, 0)
@@ -311,78 +455,67 @@ const InteractiveGlobe: React.FC<{
 
       const core = new THREE.Mesh(
         new THREE.SphereGeometry(0.028, 20, 20),
-        new THREE.MeshBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: isActive ? 1 : 0.55,
-        }),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 }),
       )
       core.position.copy(pos)
       core.userData = { continentKey: key }
       group.add(core)
 
-      hotspotMeshes.push({ outer: ring, core })
+      hotspotMeshRef.current[key] = { outer: ring, core }
+      hotspotPulseList.push({ outer: ring, core, key })
     })
 
-    const atmosMat = new THREE.ShaderMaterial({
-      vertexShader:
-        'varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
-      fragmentShader:
-        'varying vec3 vN;void main(){float i=pow(0.6-dot(vN,vec3(0,0,1)),3.0);gl_FragColor=vec4(1,1,1,i*0.12);}',
-      blending: THREE.AdditiveBlending,
-      side: THREE.BackSide,
-      transparent: true,
-    })
-    group.add(new THREE.Mesh(new THREE.SphereGeometry(1.12, 64, 64), atmosMat))
+    // Atmosphere glow
+    group.add(new THREE.Mesh(
+      new THREE.SphereGeometry(1.12, 64, 64),
+      new THREE.ShaderMaterial({
+        vertexShader: 'varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',
+        fragmentShader: 'varying vec3 vN;void main(){float i=pow(0.6-dot(vN,vec3(0,0,1)),3.0);gl_FragColor=vec4(1,1,1,i*0.12);}',
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide,
+        transparent: true,
+      }),
+    ))
 
+    // Raycaster for click detection
     const raycaster = new THREE.Raycaster()
     const mouse = new THREE.Vector2()
-
-    let isDragging = false
-    let prev = { x: 0, y: 0 }
-    let vel = { x: 0, y: 0 }
-    let target = { x: 0.2, y: 0 }
-    let dragStart = { x: 0, y: 0 }
     const el = renderer.domElement
 
+    let prevX = 0, prevY = 0
+
     const onDown = (e: MouseEvent | TouchEvent) => {
-      isDragging = true
-      const cx = (e as MouseEvent).clientX || (e as TouchEvent).touches?.[0]?.clientX || 0
-      const cy = (e as MouseEvent).clientY || (e as TouchEvent).touches?.[0]?.clientY || 0
-      prev = { x: cx, y: cy }
-      vel = { x: 0, y: 0 }
-      dragStart = { x: cx, y: cy }
+      isDraggingRef.current = true
+      const cx = (e as MouseEvent).clientX ?? (e as TouchEvent).touches?.[0]?.clientX ?? 0
+      const cy = (e as MouseEvent).clientY ?? (e as TouchEvent).touches?.[0]?.clientY ?? 0
+      prevX = cx; prevY = cy
+      velRef.current = { x: 0, y: 0 }
+      dragStartRef.current = { x: cx, y: cy }
     }
 
     const onMove = (e: MouseEvent | TouchEvent) => {
-      if (!isDragging) return
-      const x = (e as MouseEvent).clientX || (e as TouchEvent).touches?.[0]?.clientX || 0
-      const y = (e as MouseEvent).clientY || (e as TouchEvent).touches?.[0]?.clientY || 0
-      vel.x = (y - prev.y) * 0.003
-      vel.y = (x - prev.x) * 0.003
-      target.x += vel.x
-      target.y += vel.y
-      prev = { x, y }
+      if (!isDraggingRef.current) return
+      const x = (e as MouseEvent).clientX ?? (e as TouchEvent).touches?.[0]?.clientX ?? 0
+      const y = (e as MouseEvent).clientY ?? (e as TouchEvent).touches?.[0]?.clientY ?? 0
+      velRef.current.x = (y - prevY) * 0.003
+      velRef.current.y = (x - prevX) * 0.003
+      targetRef.current.x += velRef.current.x
+      targetRef.current.y += velRef.current.y
+      prevX = x; prevY = y
     }
 
-    const onUp = () => {
-      isDragging = false
-    }
+    const onUp = () => { isDraggingRef.current = false }
 
     const onClick = (e: MouseEvent) => {
-      const dx = e.clientX - dragStart.x
-      const dy = e.clientY - dragStart.y
+      const dx = e.clientX - dragStartRef.current.x
+      const dy = e.clientY - dragStartRef.current.y
       if (Math.sqrt(dx * dx + dy * dy) > 8) return
-
-      const rect = renderer.domElement.getBoundingClientRect()
+      const rect = el.getBoundingClientRect()
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
-      const intersects = raycaster.intersectObjects(group.children, false)
-      const hit = intersects.find((i) => i.object.userData?.continentKey)
-      if (hit?.object?.userData?.continentKey) {
-        onContinentClick(hit.object.userData.continentKey)
-      }
+      const hit = raycaster.intersectObjects(group.children, false).find((i) => i.object.userData?.continentKey)
+      if (hit?.object?.userData?.continentKey) onContinentClick(hit.object.userData.continentKey)
     }
 
     el.addEventListener('mousedown', onDown)
@@ -395,34 +528,33 @@ const InteractiveGlobe: React.FC<{
     el.addEventListener('click', onClick)
 
     let time = 0
-
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate)
       time += 0.02
 
-      if (!isDragging) {
-        target.y += 0.001
-        vel.x *= 0.95
-        vel.y *= 0.95
-        target.x += vel.x
-        target.y += vel.y
+      if (!isDraggingRef.current) {
+        targetRef.current.y += 0.001
+        velRef.current.x *= 0.95
+        velRef.current.y *= 0.95
+        targetRef.current.x += velRef.current.x
+        targetRef.current.y += velRef.current.y
       }
 
-      target.x = Math.max(-1.2, Math.min(1.2, target.x))
-      group.rotation.x += (target.x - group.rotation.x) * 0.05
-      group.rotation.y += (target.y - group.rotation.y) * 0.05
+      targetRef.current.x = Math.max(-1.2, Math.min(1.2, targetRef.current.x))
+      group.rotation.x += (targetRef.current.x - group.rotation.x) * 0.05
+      group.rotation.y += (targetRef.current.y - group.rotation.y) * 0.05
 
-      hotspotMeshes.forEach((h, i) => {
+      hotspotPulseList.forEach((h, i) => {
+        const isActive = activeContinentRef.current === h.key
         const pulse = Math.sin(time + i * 1.2) * 0.5 + 0.5
         const outerMat = h.outer.material as THREE.MeshBasicMaterial
-        outerMat.opacity = 0.12 + pulse * 0.2
-        const s = 1 + pulse * 0.15
+        outerMat.opacity = (isActive ? 0.3 : 0.12) + pulse * (isActive ? 0.3 : 0.15)
+        const s = 1 + pulse * (isActive ? 0.25 : 0.12)
         h.core.scale.set(s, s, s)
       })
 
       renderer.render(scene, camera)
     }
-
     animate()
 
     const handleResize = () => {
@@ -432,13 +564,11 @@ const InteractiveGlobe: React.FC<{
       camera.updateProjectionMatrix()
       renderer.setSize(w, h)
     }
-
     window.addEventListener('resize', handleResize)
 
     return () => {
       if (frameRef.current) cancelAnimationFrame(frameRef.current)
       window.removeEventListener('resize', handleResize)
-      el.removeEventListener('click', onClick)
       el.removeEventListener('mousedown', onDown)
       el.removeEventListener('mousemove', onMove)
       el.removeEventListener('mouseup', onUp)
@@ -446,21 +576,62 @@ const InteractiveGlobe: React.FC<{
       el.removeEventListener('touchstart', onDown)
       el.removeEventListener('touchmove', onMove)
       el.removeEventListener('touchend', onUp)
-      container.removeChild(renderer.domElement)
+      el.removeEventListener('click', onClick)
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement)
       renderer.dispose()
+      outlineMatRef.current = {}
+      hotspotMeshRef.current = {}
+      groupRef.current = null
     }
-  }, [activeContinent, onContinentClick])
+  }, [onContinentClick]) // scene is built once; onContinentClick is memoized so this never re-fires
+
+  // Effect 2 – update materials + pan camera whenever activeContinent changes (no scene rebuild)
+  useEffect(() => {
+    activeContinentRef.current = activeContinent
+
+    // Update continent outline material opacities
+    Object.entries(outlineMatRef.current).forEach(([key, mats]) => {
+      const isActive =
+        activeContinent === key ||
+        (key === 'oceania' && activeContinent === 'asia_pacific') ||
+        (key === 'asia' && activeContinent === 'asia_pacific')
+      mats.glow.opacity = isActive ? 0.22 : 0.06
+      mats.main.opacity = isActive ? 0.9 : 0.4
+      mats.core.opacity = isActive ? 0.65 : 0.25
+    })
+
+    // Update hotspot ring base opacities (pulse animation reads activeContinentRef live)
+    Object.entries(hotspotMeshRef.current).forEach(([key, meshes]) => {
+      const isActive = activeContinent === key
+      ;(meshes.outer.material as THREE.MeshBasicMaterial).opacity = isActive ? 0.7 : 0.25
+      ;(meshes.core.material as THREE.MeshBasicMaterial).opacity = isActive ? 1 : 0.55
+    })
+
+    // Pan globe to center on selected continent
+    if (activeContinent && CONTINENTS[activeContinent]) {
+      const c = CONTINENTS[activeContinent]
+      // Target rotation to bring lat/lng to face the camera
+      const newTargetX = c.lat * Math.PI / 180
+      const rawTargetY = -(c.lng + 90) * Math.PI / 180
+
+      // Shortest angular path from current globe rotation (avoids spinning multiple laps)
+      const currentY = groupRef.current?.rotation.y ?? targetRef.current.y
+      let diff = rawTargetY - currentY
+      while (diff > Math.PI) diff -= 2 * Math.PI
+      while (diff < -Math.PI) diff += 2 * Math.PI
+
+      targetRef.current.x = newTargetX
+      targetRef.current.y = currentY + diff
+      velRef.current = { x: 0, y: 0 }
+    }
+  }, [activeContinent])
 
   return (
     <div
       ref={mountRef}
       style={{ width: '100%', height: '100%', cursor: 'grab' }}
-      onMouseDown={(e) => {
-        e.currentTarget.style.cursor = 'grabbing'
-      }}
-      onMouseUp={(e) => {
-        e.currentTarget.style.cursor = 'grab'
-      }}
+      onMouseDown={(e) => { e.currentTarget.style.cursor = 'grabbing' }}
+      onMouseUp={(e) => { e.currentTarget.style.cursor = 'grab' }}
     />
   )
 }
