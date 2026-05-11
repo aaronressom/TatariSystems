@@ -1201,3 +1201,38 @@ a {
 [style*='var(--inst-text-'] {
   transition: color 0.25s ease-in-out;
 }
+
+/* ── Home page layout utilities ───────────────────────── */
+.home-how-build {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.home-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .home-how-build {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .home-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .home-bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-bento-grid article[style*="span 2"] {
+    grid-column: span 1;
+  }
+}
